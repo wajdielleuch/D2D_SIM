@@ -20,7 +20,7 @@ CQI_diff = 1; // this is the CQI threshold used in mode 0 to enable the optimiza
 
 update_rate = 1; //  this is the optimisation interval expressed in seconds ... we can shoose different values
 
-The resulted files are generated in .txt files including many key information abour each simulation scenario. 
+The resulted files are generated in .txt files including many key information about each simulation scenario. 
 
 the code includes some comments in French which will be translated into English as soon as possible.
 
