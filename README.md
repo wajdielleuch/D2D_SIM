@@ -10,7 +10,7 @@ Area_Width = 500 ; // the width of the simulmation area in meters :
 
 Area_Height = 500; //  the height of the simulmation area in meters 
 
-Speed = 10;  // Simulation speed  it is possible to adjust the initial speed by holding the up or down buttons on the keyboard 
+Speed = 10;  // Simulation speed expressed in MilliSecond. it is possible to adjust the initial speed by holding the up or down buttons on the keyboard. For normal node movement, speed should be fixed to 1000 ms (1s)   
 
 Mode = 0;  //  0 : not Optimized "less cost" approach and  1 for "optimized tree" approach	
 
