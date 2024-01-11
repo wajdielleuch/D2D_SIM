@@ -1,6 +1,6 @@
 /*********************************************************************/
 /*                                                                   */
-/* Copyright 2023 Wajdi ELLEUCH                                     */
+/* Copyright 2024 Wajdi ELLEUCH                                     */
 /*                                                                   */
 /*********************************************************************/
 
@@ -14,20 +14,35 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+
 class Simul{
 	public static int nbr_User = 69;
-    public static final int Area_Width = 500;
-    public static final int Area_Height =500;
-	public static  int Speed = 10;
-	public static boolean FILE_APPEND = false;
+    
+    public static int Area_Height =500;
+	public static int Area_Width = 500;
+	public static  int Speed = 0;
+	
 	public static int SIM_DURATION = 7200 ; // 7200 sec (2heures)  10800 3heures
 	public static int Mode = 0;  //0 : Loosely not Optimized  1 Loosely coupled optmized	
-	public static int transmission_range = 100; // User Radio Range 
-	public static int CQI_Threshold = 1;
+	public static int transmission_range_min = 100; // random User Radio Rangefrom 100 to 200 meters
+	public static int transmission_range_max = 200; // random User Radio Rangefrom 100 to 200 meters
+	public static int CQI_Threshold = 0;
 	public static int update_rate = 1; // second
+    public static boolean FILE_APPEND = false;
+	public static boolean start_Sim = false;
 
+	/// main method //// 
     public static void main(String[] args){
 
+	 // start simulation prams windows
+	 Params param = new Params();
+	
+while (true) {
+//System.out.println("Value of start_Sim : " + start_Sim);
+try{
+		Thread.sleep(1000);		
+	    }catch(Exception e){}
+if (start_Sim){
 	if (args.length == 1)
 	nbr_User = Integer.parseInt(args[0]);
 	// Mettre les Users dans un ArrayList
@@ -50,83 +65,83 @@ class Simul{
 			angle = random.nextInt(12) %12;
 			speed = random.nextInt(4) + 1 ; // 4 is a max speed    +1 to avoid speed null spee range [1--4]
 		}
- 	User U0 = new User(0,Couleur.JAUNE, new Point(0,0), random.nextInt(100) + transmission_range, false);	
-	User U1 = new User(1,Couleur.JAUNE, array_Trajectory.get(1).get(0), random.nextInt(100) + transmission_range, false);
-	User U2 = new User(2,Couleur.JAUNE, array_Trajectory.get(2).get(0), random.nextInt(100) + transmission_range, false);
-	User U3 = new User(3,Couleur.JAUNE, array_Trajectory.get(3).get(0), random.nextInt(100) + transmission_range, false);
-	User U4 = new User(4,Couleur.JAUNE, array_Trajectory.get(4).get(0), random.nextInt(100) + transmission_range, false);
-	User U5 = new User(5,Couleur.JAUNE, array_Trajectory.get(5).get(0),random.nextInt(100) + transmission_range, false);
-	User U6 = new User(6,Couleur.JAUNE, array_Trajectory.get(6).get(0), random.nextInt(100) + transmission_range, false);
-	User U7 = new User(7,Couleur.JAUNE, array_Trajectory.get(7).get(0), random.nextInt(100) + transmission_range, false);
-	User U8 = new User(8,Couleur.JAUNE,array_Trajectory.get(8).get(0), random.nextInt(100) + transmission_range, false);
-	User U9 = new User(9,Couleur.JAUNE, array_Trajectory.get(9).get(0), random.nextInt(100) + transmission_range, false);
-	User U10 = new User(10,Couleur.JAUNE, array_Trajectory.get(10).get(0), random.nextInt(100) + transmission_range, false);
+ 	User U0 = new User(0,Couleur.JAUNE, new Point(0,0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);	
+	User U1 = new User(1,Couleur.JAUNE, array_Trajectory.get(1).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U2 = new User(2,Couleur.JAUNE, array_Trajectory.get(2).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U3 = new User(3,Couleur.JAUNE, array_Trajectory.get(3).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U4 = new User(4,Couleur.JAUNE, array_Trajectory.get(4).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U5 = new User(5,Couleur.JAUNE, array_Trajectory.get(5).get(0),random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U6 = new User(6,Couleur.JAUNE, array_Trajectory.get(6).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U7 = new User(7,Couleur.JAUNE, array_Trajectory.get(7).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U8 = new User(8,Couleur.JAUNE,array_Trajectory.get(8).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U9 = new User(9,Couleur.JAUNE, array_Trajectory.get(9).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U10 = new User(10,Couleur.JAUNE, array_Trajectory.get(10).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
 
-	User U11 = new User(11,Couleur.JAUNE, array_Trajectory.get(11).get(0), random.nextInt(100) + transmission_range, false);
-	User U12 = new User(12,Couleur.JAUNE, array_Trajectory.get(12).get(0), random.nextInt(100) + transmission_range, false);
-	User U13 = new User(13,Couleur.JAUNE, array_Trajectory.get(13).get(0), random.nextInt(100) + transmission_range, false);
-	User U14 = new User(14,Couleur.JAUNE, array_Trajectory.get(14).get(0), random.nextInt(100) + transmission_range, false);
-	User U15 = new User(15,Couleur.JAUNE, array_Trajectory.get(15).get(0),random.nextInt(100) + transmission_range, false);
-	User U16 = new User(16,Couleur.JAUNE, array_Trajectory.get(16).get(0), random.nextInt(100) + transmission_range, false);
-	User U17 = new User(17,Couleur.JAUNE, array_Trajectory.get(17).get(0), random.nextInt(100) + transmission_range, false);
-	User U18 = new User(18,Couleur.JAUNE,array_Trajectory.get(18).get(0), random.nextInt(100) + transmission_range, false);
-	User U19 = new User(19,Couleur.JAUNE, array_Trajectory.get(19).get(0), random.nextInt(100) + transmission_range, false);
-	User U20 = new User(20,Couleur.JAUNE, array_Trajectory.get(20).get(0), random.nextInt(100) + transmission_range, false);
+	User U11 = new User(11,Couleur.JAUNE, array_Trajectory.get(11).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U12 = new User(12,Couleur.JAUNE, array_Trajectory.get(12).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U13 = new User(13,Couleur.JAUNE, array_Trajectory.get(13).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U14 = new User(14,Couleur.JAUNE, array_Trajectory.get(14).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U15 = new User(15,Couleur.JAUNE, array_Trajectory.get(15).get(0),random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U16 = new User(16,Couleur.JAUNE, array_Trajectory.get(16).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U17 = new User(17,Couleur.JAUNE, array_Trajectory.get(17).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U18 = new User(18,Couleur.JAUNE,array_Trajectory.get(18).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U19 = new User(19,Couleur.JAUNE, array_Trajectory.get(19).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U20 = new User(20,Couleur.JAUNE, array_Trajectory.get(20).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
 
-	User U21 = new User(21,Couleur.JAUNE, array_Trajectory.get(21).get(0), random.nextInt(100) + transmission_range, false);
-	User U22 = new User(22,Couleur.JAUNE, array_Trajectory.get(22).get(0), random.nextInt(100) + transmission_range, false);
-	User U23 = new User(23,Couleur.JAUNE, array_Trajectory.get(23).get(0), random.nextInt(100) + transmission_range, false);
-	User U24 = new User(24,Couleur.JAUNE, array_Trajectory.get(24).get(0), random.nextInt(100) + transmission_range, false);
-	User U25 = new User(25,Couleur.JAUNE, array_Trajectory.get(25).get(0),random.nextInt(100) + transmission_range, false);
-	User U26 = new User(26,Couleur.JAUNE, array_Trajectory.get(26).get(0), random.nextInt(100) + transmission_range, false);
-	User U27 = new User(27,Couleur.JAUNE, array_Trajectory.get(27).get(0), random.nextInt(100) + transmission_range, false);
-	User U28 = new User(28,Couleur.JAUNE,array_Trajectory.get(28).get(0), random.nextInt(100) + transmission_range, false);
-	User U29 = new User(29,Couleur.JAUNE, array_Trajectory.get(29).get(0), random.nextInt(100) + transmission_range, false);
+	User U21 = new User(21,Couleur.JAUNE, array_Trajectory.get(21).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U22 = new User(22,Couleur.JAUNE, array_Trajectory.get(22).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U23 = new User(23,Couleur.JAUNE, array_Trajectory.get(23).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U24 = new User(24,Couleur.JAUNE, array_Trajectory.get(24).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U25 = new User(25,Couleur.JAUNE, array_Trajectory.get(25).get(0),random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U26 = new User(26,Couleur.JAUNE, array_Trajectory.get(26).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U27 = new User(27,Couleur.JAUNE, array_Trajectory.get(27).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U28 = new User(28,Couleur.JAUNE,array_Trajectory.get(28).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U29 = new User(29,Couleur.JAUNE, array_Trajectory.get(29).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
 	
-	User U30 = new User(30,Couleur.JAUNE, array_Trajectory.get(30).get(0), random.nextInt(100) + transmission_range, false);
-	User U31 = new User(31,Couleur.JAUNE, array_Trajectory.get(31).get(0), random.nextInt(100) + transmission_range, false);
-	User U32 = new User(32,Couleur.JAUNE, array_Trajectory.get(32).get(0), random.nextInt(100) + transmission_range, false);
-	User U33 = new User(33,Couleur.JAUNE, array_Trajectory.get(33).get(0), random.nextInt(100) + transmission_range, false);
-	User U34 = new User(34,Couleur.JAUNE, array_Trajectory.get(34).get(0), random.nextInt(100) + transmission_range, false);
-	User U35 = new User(35,Couleur.JAUNE, array_Trajectory.get(35).get(0),random.nextInt(100) + transmission_range, false);
-	User U36 = new User(36,Couleur.JAUNE, array_Trajectory.get(36).get(0), random.nextInt(100) + transmission_range, false);
-	User U37 = new User(37,Couleur.JAUNE, array_Trajectory.get(37).get(0), random.nextInt(100) + transmission_range, false);
-	User U38 = new User(38,Couleur.JAUNE,array_Trajectory.get(38).get(0), random.nextInt(100) + transmission_range, false);
-	User U39 = new User(39,Couleur.JAUNE, array_Trajectory.get(39).get(0), random.nextInt(100) + transmission_range, false);
-	User U40 = new User(40,Couleur.JAUNE, array_Trajectory.get(40).get(0), random.nextInt(100) + transmission_range, false);
+	User U30 = new User(30,Couleur.JAUNE, array_Trajectory.get(30).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U31 = new User(31,Couleur.JAUNE, array_Trajectory.get(31).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U32 = new User(32,Couleur.JAUNE, array_Trajectory.get(32).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U33 = new User(33,Couleur.JAUNE, array_Trajectory.get(33).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U34 = new User(34,Couleur.JAUNE, array_Trajectory.get(34).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U35 = new User(35,Couleur.JAUNE, array_Trajectory.get(35).get(0),random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U36 = new User(36,Couleur.JAUNE, array_Trajectory.get(36).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U37 = new User(37,Couleur.JAUNE, array_Trajectory.get(37).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U38 = new User(38,Couleur.JAUNE,array_Trajectory.get(38).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U39 = new User(39,Couleur.JAUNE, array_Trajectory.get(39).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U40 = new User(40,Couleur.JAUNE, array_Trajectory.get(40).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
 
-	User U41 = new User(41,Couleur.JAUNE, array_Trajectory.get(41).get(0), random.nextInt(100) + transmission_range, false);
-	User U42 = new User(42,Couleur.JAUNE, array_Trajectory.get(42).get(0), random.nextInt(100) + transmission_range, false);
-	User U43 = new User(43,Couleur.JAUNE, array_Trajectory.get(43).get(0), random.nextInt(100) + transmission_range, false);
-	User U44 = new User(44,Couleur.JAUNE, array_Trajectory.get(44).get(0), random.nextInt(100) + transmission_range, false);
-	User U45 = new User(45,Couleur.JAUNE, array_Trajectory.get(45).get(0),random.nextInt(100) + transmission_range, false);
-	User U46 = new User(46,Couleur.JAUNE, array_Trajectory.get(46).get(0), random.nextInt(100) + transmission_range, false);
-	User U47 = new User(47,Couleur.JAUNE, array_Trajectory.get(47).get(0), random.nextInt(100) + transmission_range, false);
-	User U48 = new User(48,Couleur.JAUNE,array_Trajectory.get(48).get(0), random.nextInt(100) + transmission_range, false);
-	User U49 = new User(49,Couleur.JAUNE, array_Trajectory.get(49).get(0), random.nextInt(100) + transmission_range, false);
-	User U50 = new User(50,Couleur.JAUNE, array_Trajectory.get(50).get(0), random.nextInt(100) + transmission_range, false);
+	User U41 = new User(41,Couleur.JAUNE, array_Trajectory.get(41).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U42 = new User(42,Couleur.JAUNE, array_Trajectory.get(42).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U43 = new User(43,Couleur.JAUNE, array_Trajectory.get(43).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U44 = new User(44,Couleur.JAUNE, array_Trajectory.get(44).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U45 = new User(45,Couleur.JAUNE, array_Trajectory.get(45).get(0),random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U46 = new User(46,Couleur.JAUNE, array_Trajectory.get(46).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U47 = new User(47,Couleur.JAUNE, array_Trajectory.get(47).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U48 = new User(48,Couleur.JAUNE,array_Trajectory.get(48).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U49 = new User(49,Couleur.JAUNE, array_Trajectory.get(49).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U50 = new User(50,Couleur.JAUNE, array_Trajectory.get(50).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
 
-	User U51 = new User(51,Couleur.JAUNE, array_Trajectory.get(51).get(0), random.nextInt(100) + transmission_range, false);
-	User U52 = new User(52,Couleur.JAUNE, array_Trajectory.get(52).get(0), random.nextInt(100) + transmission_range, false);
-	User U53 = new User(53,Couleur.JAUNE, array_Trajectory.get(53).get(0), random.nextInt(100) + transmission_range, false);
-	User U54 = new User(54,Couleur.JAUNE, array_Trajectory.get(54).get(0), random.nextInt(100) + transmission_range, false);
-	User U55 = new User(55,Couleur.JAUNE, array_Trajectory.get(55).get(0),random.nextInt(100) + transmission_range, false);
-	User U56 = new User(56,Couleur.JAUNE, array_Trajectory.get(56).get(0), random.nextInt(100) + transmission_range, false);
-	User U57 = new User(57,Couleur.JAUNE, array_Trajectory.get(57).get(0), random.nextInt(100) + transmission_range, false);
-	User U58 = new User(58,Couleur.JAUNE,array_Trajectory.get(58).get(0), random.nextInt(100) + transmission_range, false);
-	User U59 = new User(59,Couleur.JAUNE, array_Trajectory.get(59).get(0), random.nextInt(100) + transmission_range, false);
-	User U60 = new User(60,Couleur.JAUNE, array_Trajectory.get(60).get(0), random.nextInt(100) + transmission_range, false);
+	User U51 = new User(51,Couleur.JAUNE, array_Trajectory.get(51).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U52 = new User(52,Couleur.JAUNE, array_Trajectory.get(52).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U53 = new User(53,Couleur.JAUNE, array_Trajectory.get(53).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U54 = new User(54,Couleur.JAUNE, array_Trajectory.get(54).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U55 = new User(55,Couleur.JAUNE, array_Trajectory.get(55).get(0),random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U56 = new User(56,Couleur.JAUNE, array_Trajectory.get(56).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U57 = new User(57,Couleur.JAUNE, array_Trajectory.get(57).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U58 = new User(58,Couleur.JAUNE,array_Trajectory.get(58).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U59 = new User(59,Couleur.JAUNE, array_Trajectory.get(59).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U60 = new User(60,Couleur.JAUNE, array_Trajectory.get(60).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
 
-	User U61 = new User(61,Couleur.JAUNE, array_Trajectory.get(61).get(0), random.nextInt(100) + transmission_range, false);
-	User U62 = new User(62,Couleur.JAUNE, array_Trajectory.get(62).get(0), random.nextInt(100) + transmission_range, false);
-	User U63 = new User(63,Couleur.JAUNE, array_Trajectory.get(63).get(0), random.nextInt(100) + transmission_range, false);
-	User U64 = new User(64,Couleur.JAUNE, array_Trajectory.get(64).get(0), random.nextInt(100) + transmission_range, false);
-	User U65 = new User(65,Couleur.JAUNE, array_Trajectory.get(65).get(0),random.nextInt(100) + transmission_range, false);
-	User U66 = new User(66,Couleur.JAUNE, array_Trajectory.get(66).get(0), random.nextInt(100) + transmission_range, false);
-	User U67 = new User(67,Couleur.JAUNE, array_Trajectory.get(67).get(0), random.nextInt(100) + transmission_range, false);
-	User U68 = new User(68,Couleur.JAUNE,array_Trajectory.get(68).get(0), random.nextInt(100) + transmission_range, false);
-	User U69 = new User(69,Couleur.JAUNE, array_Trajectory.get(69).get(0), random.nextInt(100) + transmission_range, false);
-	User U70 = new User(70,Couleur.JAUNE, array_Trajectory.get(70).get(0), random.nextInt(100) + transmission_range, false);
+	User U61 = new User(61,Couleur.JAUNE, array_Trajectory.get(61).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U62 = new User(62,Couleur.JAUNE, array_Trajectory.get(62).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U63 = new User(63,Couleur.JAUNE, array_Trajectory.get(63).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U64 = new User(64,Couleur.JAUNE, array_Trajectory.get(64).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U65 = new User(65,Couleur.JAUNE, array_Trajectory.get(65).get(0),random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U66 = new User(66,Couleur.JAUNE, array_Trajectory.get(66).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U67 = new User(67,Couleur.JAUNE, array_Trajectory.get(67).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U68 = new User(68,Couleur.JAUNE,array_Trajectory.get(68).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U69 = new User(69,Couleur.JAUNE, array_Trajectory.get(69).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
+	User U70 = new User(70,Couleur.JAUNE, array_Trajectory.get(70).get(0), random.nextInt(transmission_range_max - transmission_range_min ) + transmission_range_min, false);
 
 	ArrayWaitingUsers.add(U1); 	ArrayWaitingUsers.add(U2); 	ArrayWaitingUsers.add(U3); 	ArrayWaitingUsers.add(U4);
 	ArrayWaitingUsers.add(U5); 	ArrayWaitingUsers.add(U6);	ArrayWaitingUsers.add(U7);	ArrayWaitingUsers.add(U8);
@@ -147,16 +162,14 @@ class Simul{
 	ArrayWaitingUsers.add(U65);	ArrayWaitingUsers.add(U66);ArrayWaitingUsers.add(U67);	ArrayWaitingUsers.add(U68);	
 	ArrayWaitingUsers.add(U69);ArrayWaitingUsers.add(U70);
  
-	//System.out.println("j'ai " + String.valueOf(ArrayUsers.size()+ " Utilistateurs mobiles"));
-	//System.out.println("j'ai " + ArrayUsers.get(0));
-int[] array_Optimization_Interval_values = new int[]{1,2,3,4,5,6,8,10,20};
-//int[] array_Optimization_Interval_values = new int[]{1};
-int[] array_CQI_Threshold_Values = new int[]{0,1,2,3,4,5,6,7,8,9,10,11,15};
+/**  If We need to make successive and continues simulations, we shhould indiacate CQI_Threshold ans update_rates values in array_list
+int[] array_Optimization_Interval_values = new int[]{1,2};
+int[] array_CQI_Threshold_Values = new int[]{0,15,1};
 for (int jjj =0; jjj<array_Optimization_Interval_values.length; jjj++)
 { update_rate = array_Optimization_Interval_values[jjj];
 for (int iii=0; iii<array_CQI_Threshold_Values.length; iii++)
 { CQI_Threshold = array_CQI_Threshold_Values[iii]; 
-
+ */
 //for (CQI_Threshold = -1; CQI_Threshold < 0; CQI_Threshold++)
 //{   
 	int Total_SIM_STEP_lost_CQI = 0;
@@ -180,20 +193,23 @@ else
 	int total_cqi =0;
 	int total_nbr_optimization_oper = 0;
 	int  stat_0_groupe_Duration = 0 , stat_1_groupe_Duration = 0, stat_2_groupe_Duration = 0, stat_3_groupe_Duration = 0, stat_4_groupe_Duration = 0, stat_5More_groupe_Duration = 0; 
-	
+	int update_message =0 , notif_message = 0;
+	int ID_size = 9 ; // ID Size = 8 octets 
 	////////////////////////////////////////////////////////////////////////////
 	////////////////////////////    DEBUT DE LA SIMULATION     /////////////////
 	////////////////////////////////////////////////////////////////////////////
 
 	while(sim_step < SIM_DURATION)
-	{	    
+	{	  notif_message = 0;  
 		// Add 1 user every 100 seconds
 		if  (index_add < nbr_User)
 		{	if (sim_step%100 == 0)
-			{
+			{   index_add ++ ; 
 				ArrayUsers.add(ArrayWaitingUsers.get(index_add));
 				System.out.println("Addiiiing " + ArrayWaitingUsers.get(index_add) + " at " + sim_step + " Seconds" );
-				index_add ++; 
+				
+				notif_message = index_add * (ID_size); // we add 1 to represent the separator between IDs
+				
 			}
 		}	
 
@@ -260,13 +276,11 @@ else
 				}
 			}
 			stat_groupe_Duration = ArrayUsers.get(0).get_nbr_groups(ArrayUsers);
-
-
 			
 		//////////////////////////////////////////////////////////////////////////////////////////////////////						
 		///////////////////////////////////////////////////   STAT    ////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////////////////////////////	
-		//CREATE Ligne dans le ArrayLines AND STAT 
+		//CREATE links  in the  ArrayLines AND make STAT 
 		int nbr_connections = 0;
 		int total_cqi_per_op = 0 ;
 		int nbr_optimization_oper =0;
@@ -282,7 +296,17 @@ else
 				//System.out.print("\t CQI : " + a_user.get_CQI(c_user) );
 				//write ("CQI de " + a_user + " avec " + c_user + " est égale à : " + a_user.get_CQI(c_user));				
 			}
+			if ( (a_user.array_OldConnected_User_Inrange != a_user.array_Connected_User_Inrange ))
+			{   notif_message = notif_message + (index_add) * (ID_size) ;
+				
+				update_message = update_message + ID_size; 
+				if (a_user.array_Connected_User_Inrange.size() > 1)
+				{// System.out.println ( "a_user.array_Connected_User_Inrange.size()" + a_user.array_Connected_User_Inrange.size());		
+				update_message = update_message + ((a_user.array_Connected_User_Inrange.size() -1) * ID_size) ;			
+			}   }
+	
 			nbr_optimization_oper +=  a_user.number_of_optimization;
+	
 			a_user.number_of_optimization = 0;
 			
 			if (stat_groupe_Duration == 1)
@@ -292,22 +316,27 @@ else
 			if (stat_groupe_Duration >= 3)
 			stat_3_groupe_Duration++;			
 		}
+
+		notif_message -= 1;
+
+		//if (update_message > 0)
+		//
 		total_nbr_optimization_oper += nbr_optimization_oper;
 		total_cqi += total_cqi_per_op;
 		///// OUTPUT FILE FOR STAT  ////////////
 
 		if (sim_step == 1)  // prépare l'Entête
 		{
-			//write("Time (seconds) \t Number of Users \t CQI_per_op \t total_cqi_per_op \t Nbr_Connections_per_op \t Avrg_CQI/connections *100  \t  Global_Total_CQI  \t Nbr of links update_per_Op. \t total_nbr_optimization_oper \t SIM_STEP_lost_CQI \t Total_SIM_STEP_lost_CQI");
-			write("sim_ste  \t  ArrayUsers.size()  \t  total_cqi_per_op  \t  nbr_connections  \t   total_cqi_per_op/nbr_connections  \t   total_cqi  \t nbr_optimization_oper  \t  total_nbr_optimization_oper  ");
+			write("sim_ste  \t  ArrayUsers.size()  \t  total_cqi_per_op  \t  nbr_connections  \t   total_cqi_per_op/nbr_connections  \t   total_cqi  \t nbr_optimization_oper  \t  total_nbr_optimization_oper  \t  update_message  \t  notif_message  ");
 
 			FILE_APPEND =  true;
 		}
 		if (nbr_connections == 0)
-		write(sim_step +"\t" + ArrayUsers.size() + "\t" + total_cqi_per_op + "\t" + nbr_connections + "\t" + 0 +"\t "+ total_cqi + "\t" + nbr_optimization_oper +"\t" +total_nbr_optimization_oper);
+		write(sim_step +"\t" + ArrayUsers.size() + "\t" + total_cqi_per_op + "\t" + nbr_connections + "\t" + 0 +"\t "+ total_cqi + "\t" + nbr_optimization_oper +"\t" +total_nbr_optimization_oper + "\t" + update_message + "\t" + notif_message );
 		else
-		write(sim_step +"\t" + ArrayUsers.size() + "\t" + total_cqi_per_op + "\t"+ nbr_connections + "\t" + total_cqi_per_op /nbr_connections + "\t "+  total_cqi    + "\t" + nbr_optimization_oper  + "\t" + total_nbr_optimization_oper  );
+		write(sim_step +"\t" + ArrayUsers.size() + "\t" + total_cqi_per_op + "\t"+ nbr_connections + "\t" + total_cqi_per_op /nbr_connections + "\t "+  total_cqi    + "\t" + nbr_optimization_oper  + "\t" + total_nbr_optimization_oper + "\t" + update_message + "\t" + notif_message );
 		
+		 update_message  =0 ;   notif_message =0;
 
 		//Ajouter les Lignes dans l'Affichage
 		 for (Ligne ligne : ArrayLignes)
@@ -343,10 +372,12 @@ else
 			user.number_of_optimization =0;
 			user.lost_CQI=0;
 		}
-
-}}
-
+update_message =0; 
+notif_message = 0;
 }
+}
+}
+
 	public static int get_ligne_name(User userA, User userB){
 		return Integer.parseInt(String.valueOf(userA.getName()) + "9999" + String.valueOf(userB.getName()));
 	}

@@ -112,14 +112,14 @@ public class Animation extends Texture {
     }
 
     /**
-     * Construit une Animation à partir d'un chemin vers un fichier image, des différentes informations nécessaires, d'un Point, une largeur et une hauteur.<br />
+     * Construit une Animation à partir d'un chemin vers un fichier image, des différentes informations nécessaires, d'un Point, une Area_Width et une Area_Height.<br />
      * Par défaut, la transparence est activée.
      * @param racineCheminImage Racine du chemin d'accès vers l'image.
      * @param numeroPremiereImage numero sous forme de chaine de caracteres de la première image.
      * @param numeroDerniereImage numero sous forme de chaine de caracteres de la dernière image.
      * @param extensionImage extension de l'image (sans le point), format de fichier.
      * @param a	Position du coin bas gauche de l'image dans la zone d'affichage.
-     * @param larg Largeur souhaitée de l'image.
+     * @param larg Area_Width souhaitée de l'image.
      * @param haut Lauteur souhaitée de l'image.
      * @see Point
      */
@@ -164,7 +164,7 @@ public class Animation extends Texture {
     }
 
     /**
-     * Construit une Animation à partir d'un chemin vers un fichier image, des différentes informations nécessaires, d'un Point, une largeur et une hauteur.<br />
+     * Construit une Animation à partir d'un chemin vers un fichier image, des différentes informations nécessaires, d'un Point, une Area_Width et une Area_Height.<br />
      * Par défaut, la transparence est désactivée.
      * @param couleur Couleur de fond
      * @param racineCheminImage Racine du chemin d'accès vers l'image.
@@ -172,8 +172,8 @@ public class Animation extends Texture {
      * @param numeroDerniereImage numero sous forme de chaine de caracteres de la dernière image.
      * @param extensionImage extension de l'image (sans le point), format de fichier.
      * @param a	Position du coin bas gauche de l'image dans la zone d'affichage.
-     * @param larg Largeur souhaitée de l'image.
-     * @param haut Hauteur souhaitée de l'image.
+     * @param larg Area_Width souhaitée de l'image.
+     * @param haut Area_Height souhaitée de l'image.
      * @see Couleur
      * @see Point
      */
@@ -290,11 +290,11 @@ public class Animation extends Texture {
     public void setNumeroImage(String str){
 	/*TODO - Vérifier que le numéro appartient bien à l'ensemble d'images*/
 	numeroImageCourante=new String(str);
-	int largeur=getLargeur();
-	int hauteur=getHauteur();
+	int Area_Width=getArea_Width();
+	int Area_Height=getArea_Height();
 	setImg(racineCheminImage+numeroImageCourante+"."+extensionImage);
-	setLargeur(largeur);
-	setHauteur(hauteur);
+	setArea_Width(Area_Width);
+	setArea_Height(Area_Height);
     }
 
 
@@ -308,11 +308,11 @@ public class Animation extends Texture {
     public void afficher ( Graphics g ) {
 	if(lecture){
 	    imageSuivante();
-	    int largeur=getLargeur();
-	    int hauteur=getHauteur();
+	    int Area_Width=getArea_Width();
+	    int Area_Height=getArea_Height();
 	    setImg(racineCheminImage+numeroImageCourante+"."+extensionImage);
-	    setLargeur(largeur);
-	    setHauteur(hauteur);
+	    setArea_Width(Area_Width);
+	    setArea_Height(Area_Height);
 	}
 
 	super.afficher(g);

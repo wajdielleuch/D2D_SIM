@@ -762,10 +762,12 @@ public void Update_Links(int CQI_Threshold)
                 {   
                     this.array_Connected_User_Inrange.add(Get_Best_Neighboor(array));
                     if (! this.check_if_exist_in_array(this.Get_Best_Neighboor(array).array_Connected_User_Inrange))
-                    {if (Get_Best_Neighboor(array).array_Connected_User_Inrange == null)
+                    {
+                                    
+                    if (Get_Best_Neighboor(array).array_Connected_User_Inrange == null)
                     Get_Best_Neighboor(array).array_Connected_User_Inrange = new ArrayList<User>();
-                    
-                    if (Get_Best_Neighboor(array) != null)
+
+                    if ((Get_Best_Neighboor(array) != null) && (Get_Best_Neighboor(array).array_Connected_User_Inrange != null))
                     Get_Best_Neighboor(array).array_Connected_User_Inrange.add(this);
                     }   
                 }

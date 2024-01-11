@@ -42,15 +42,15 @@ import javax.imageio.ImageIO;
 /**
  * Cette classe permet la création de textures.<br />
  * Une texture est une image rectangulaire qui peut être affichée dans la zone d'affichage. La transparence est gérée. Les formats d'images supportées sont : gif, jpg, png et bmp.<br />
- * Contrairement aux rectangles, la modification des points A ou B (des coins bas gauche ou haut droit) ne changent pas la dimension de l'image. Pour modifier la taille de l'image, il vous faudra passer par les méthodes setHauteur et setLargeur.<br />
+ * Contrairement aux rectangles, la modification des points A ou B (des coins bas gauche ou haut droit) ne changent pas la dimension de l'image. Pour modifier la taille de l'image, il vous faudra passer par les méthodes setArea_Height et setArea_Width.<br />
  * Si une couleur est spécifiée lors de la construction de l'objet (noir sinon), que l'image utilise la transparence et que l'on demande à afficher la forme pleine alors la couleur sera utilisée comme fond.<br />
  * Une Texture est définie par une image.
  * @author Equipe 2D, Rémi Synave
  * @version 2.9
  * @see Rectangle
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/awt/image/BufferedImage.html" target="_blank">BufferedImage</a>
- * @see Rectangle#setHauteur
- * @see Rectangle#setLargeur
+ * @see Rectangle#setArea_Height
+ * @see Rectangle#setArea_Width
  */
 public class Texture extends Rectangle {
 
@@ -76,7 +76,7 @@ public class Texture extends Rectangle {
      */
     public Texture ( Texture t ){
 	super(t);
-	img = t.getImg().getSubimage(0,0,t.getLargeur(),t.getHauteur());
+	img = t.getImg().getSubimage(0,0,t.getArea_Width(),t.getArea_Height());
 	// TODO - chercher comment copier une hitbox
 	hitbox = new ArrayList<Dessin>(t.hitbox);
     }
@@ -108,21 +108,21 @@ public class Texture extends Rectangle {
 	    System.out.println ("[!] Erreur : L'image "+ chemin.substring(1,chemin.length()) +" est introuvable.\n" + e);
 	}
 
-	int largeur = img.getWidth ( null );
-	int hauteur = img.getHeight ( null );
-	setLargeur(largeur);
-	setHauteur(hauteur);
+	int Area_Width = img.getWidth ( null );
+	int Area_Height = img.getHeight ( null );
+	setArea_Width(Area_Width);
+	setArea_Height(Area_Height);
 	hitbox = new ArrayList<Dessin>();
 
-	super.setB ( new Point ( a.getX() + largeur, a.getY() + hauteur ) );
+	super.setB ( new Point ( a.getX() + Area_Width, a.getY() + Area_Height ) );
     }
 
     /**
-     * Construit une Texture à partir d'un chemin vers un fichier image, d'un Point, une largeur et une hauteur.<br />
+     * Construit une Texture à partir d'un chemin vers un fichier image, d'un Point, une Area_Width et une Area_Height.<br />
      * Par défaut, la transparence est activée.
      * @param chemin Chaîne de caractères représente le chemin d'accès vers l'image.
      * @param a	Position du coin bas gauche de l'image dans la zone d'affichage.
-     * @param larg Largeur souhaitée de l'image.
+     * @param larg Area_Width souhaitée de l'image.
      * @param haut Lauteur souhaitée de l'image.
      * @see Point
      */
@@ -141,8 +141,8 @@ public class Texture extends Rectangle {
 	    System.out.println ("[!] Erreur : L'image "+ chemin.substring(1,chemin.length()) + " est introuvable.\n" + e);
 	}
 
-	setLargeur(larg);
-	setHauteur(haut);
+	setArea_Width(larg);
+	setArea_Height(haut);
 	hitbox = new ArrayList<Dessin>();
 
 	super.setB ( new Point ( a.getX() + larg, a.getY() + haut ) );
@@ -176,24 +176,24 @@ public class Texture extends Rectangle {
 	    System.out.println ("[!] Erreur : L'image "+ chemin.substring(1,chemin.length())  +" est introuvable.\n" + e);
 	}
 
-	int largeur = img.getWidth ( null );
-	int hauteur = img.getHeight ( null );
+	int Area_Width = img.getWidth ( null );
+	int Area_Height = img.getHeight ( null );
 
-	setLargeur(largeur);
-	setHauteur(hauteur);
+	setArea_Width(Area_Width);
+	setArea_Height(Area_Height);
 	hitbox = new ArrayList<Dessin>();
 
-	setB ( new Point ( a.getX() + largeur, a.getY() + hauteur ) );
+	setB ( new Point ( a.getX() + Area_Width, a.getY() + Area_Height ) );
     }
 
     /**
-     * Construit une Texture à partir d'un chemin vers un fichier image, d'un Point, d'une largeur et d'une hauteur.<br />
+     * Construit une Texture à partir d'un chemin vers un fichier image, d'un Point, d'une Area_Width et d'une Area_Height.<br />
      * Par défaut, la transparence est désactivée.
      * @param couleur Couleur de fond
      * @param chemin Chaîne de caractères représente le chemin d'accès vers l'image.
      * @param a	Position du coin bas gauche de l'image dans la zone d'affichage.
-     * @param larg Largeur souhaitée de l'image.
-     * @param haut Hauteur souhaitée de l'image.
+     * @param larg Area_Width souhaitée de l'image.
+     * @param haut Area_Height souhaitée de l'image.
      * @see Couleur
      * @see Point
      */
@@ -212,8 +212,8 @@ public class Texture extends Rectangle {
 	    System.out.println ("[!] Erreur : L'image "+chemin.substring(1,chemin.length()) +" est introuvable.\n" + e);
 	}
 
-	setLargeur(larg);
-	setHauteur(haut);
+	setArea_Width(larg);
+	setArea_Height(haut);
 	hitbox = new ArrayList<Dessin>();
 
 	setB ( new Point ( a.getX() + larg, a.getY() + haut ) );
@@ -261,12 +261,12 @@ public class Texture extends Rectangle {
     public void setImg ( BufferedImage img ) {
 
 	this.img = img;
-	int largeur = img.getWidth ( null );
-	int hauteur = img.getHeight ( null );
-	setLargeur(largeur);
-	setHauteur(hauteur);
+	int Area_Width = img.getWidth ( null );
+	int Area_Height = img.getHeight ( null );
+	setArea_Width(Area_Width);
+	setArea_Height(Area_Height);
 
-	setB ( new Point ( getA().getX() + largeur, getA().getY() + hauteur ) );
+	setB ( new Point ( getA().getX() + Area_Width, getA().getY() + Area_Height ) );
     }
 
     /**
@@ -287,12 +287,12 @@ public class Texture extends Rectangle {
 	    System.out.println ("[!] Erreur : L'image "+chemin.substring(1,chemin.length())+" est introuvable.\n" + e);
 	}
 
-	int largeur = img.getWidth ( null );
-	int hauteur = img.getHeight ( null );
-	setLargeur(largeur);
-	setHauteur(hauteur);
+	int Area_Width = img.getWidth ( null );
+	int Area_Height = img.getHeight ( null );
+	setArea_Width(Area_Width);
+	setArea_Height(Area_Height);
 
-	super.setB ( new Point ( getA().getX() + largeur, getA().getY() + hauteur ) );
+	super.setB ( new Point ( getA().getX() + Area_Width, getA().getY() + Area_Height ) );
 
     }
 
@@ -313,9 +313,9 @@ public class Texture extends Rectangle {
      * @see Point
      */
     public void setA(Point aa){
-	/*int largeur = getLargeur();
-	int hauteur = getHauteur();
-	super.setB(new Point(aa.getX()+largeur,aa.getY()+hauteur));
+	/*int Area_Width = getArea_Width();
+	int Area_Height = getArea_Height();
+	super.setB(new Point(aa.getX()+Area_Width,aa.getY()+Area_Height));
 	super.setA(aa);*/
 	translater(aa.getX()-getA().getX(),aa.getY()-getA().getY());
     }
@@ -326,9 +326,9 @@ public class Texture extends Rectangle {
      * @see Point
      */
     public void setB(Point bb){
-	/*int largeur = getLargeur();
-	int hauteur = getHauteur();
-	super.setA(new Point(bb.getX()-largeur,bb.getY()-hauteur));
+	/*int Area_Width = getArea_Width();
+	int Area_Height = getArea_Height();
+	super.setA(new Point(bb.getX()-Area_Width,bb.getY()-Area_Height));
 	super.setB(bb);*/
 	translater(bb.getX()-getB().getX(),bb.getY()-getB().getY());
     }
@@ -372,10 +372,10 @@ public class Texture extends Rectangle {
     public void afficher ( Graphics g ) {
 
 	if ( getTransparent() )
-	    g.drawImage ( img, this.getA().getX(), (int)g.getClipBounds().getHeight()-this.getA().getY()-getHauteur(), getLargeur(), getHauteur(), null );
+	    g.drawImage ( img, this.getA().getX(), (int)g.getClipBounds().getHeight()-this.getA().getY()-getArea_Height(), getArea_Width(), getArea_Height(), null );
 
 	else
-	    g.drawImage ( img, this.getA().getX(), (int)g.getClipBounds().getHeight()-this.getA().getY()-getHauteur(), getLargeur(), getHauteur(), getCouleur(), null );
+	    g.drawImage ( img, this.getA().getX(), (int)g.getClipBounds().getHeight()-this.getA().getY()-getArea_Height(), getArea_Width(), getArea_Height(), getCouleur(), null );
     }
 
     /**

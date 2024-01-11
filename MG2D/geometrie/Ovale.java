@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 /**
  * Cette classe permet la création d'ovales.<br />
- * Un ovale est défini par un point central, une largeur, une hauteur et un booléen qui défini si la forme doit être dessinée pleine ou non.
+ * Un ovale est défini par un point central, une Area_Width, une Area_Height et un booléen qui défini si la forme doit être dessinée pleine ou non.
  * @author Equipe 2D, Rémi Synave
  * @version 2.9
  * @see Point
@@ -43,20 +43,20 @@ public class Ovale extends Dessin {
 
     private Point o;	// Point central //
 
-    private int largeur, hauteur;
+    private int Area_Width, Area_Height;
 
     private boolean plein = false;	// Détermine si l'ovale est plein ou non //
     
     // Constructeurs //
 
     /**
-     * Construit un ovale noir centré en (2,1), de largeur 4 et de hauteur 2.
+     * Construit un ovale noir centré en (2,1), de Area_Width 4 et de Area_Height 2.
      */
     public Ovale(){
 	super();
 	o = new Point(2,1);
-	largeur=4;
-	hauteur=2;
+	Area_Width=4;
+	Area_Height=2;
     }
 
     /**
@@ -69,8 +69,8 @@ public class Ovale extends Dessin {
 
 	this.o = new Point ( o.getO().getX(), o.getO().getY() );
 
-	largeur = o.getLargeur();
-	hauteur = o.getHauteur();
+	Area_Width = o.getArea_Width();
+	Area_Height = o.getArea_Height();
 
 	plein = o.getPlein();
     }
@@ -78,52 +78,52 @@ public class Ovale extends Dessin {
     // Sans couleur //
 
     /**
-     * Construit un ovale à partir d'un point central, de sa largeur et de sa hauteur.<br />
+     * Construit un ovale à partir d'un point central, de sa Area_Width et de sa Area_Height.<br />
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.
      * @param o Point central.
-     * @param largeur Largeur de l'ovale.
-     * @param hauteur Hauteur de l'ovale.
+     * @param Area_Width Area_Width de l'ovale.
+     * @param Area_Height Area_Height de l'ovale.
      * @exception java.lang.RuntimeException Cette exception est lancée si on tente de construire un ovale avec des dimensions négatives.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      * @see Point
      */
-    public Ovale ( Point o, int largeur, int hauteur ) {
+    public Ovale ( Point o, int Area_Width, int Area_Height ) {
 
 	super ( Couleur.NOIR );
 
 	this.o = new Point ( o );
 
-	this.largeur = largeur;
-	this.hauteur = hauteur;
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un ovale de largeur négative : "+largeur);
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un ovale de hauteur négative : "+hauteur);
+	this.Area_Width = Area_Width;
+	this.Area_Height = Area_Height;
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un ovale de Area_Width négative : "+Area_Width);
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un ovale de Area_Height négative : "+Area_Height);
     }
 
     /**
-     * Construit un ovale à partir d'un point central, de sa largeur et de sa hauteur.<br />
+     * Construit un ovale à partir d'un point central, de sa Area_Width et de sa Area_Height.<br />
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.
      * @param o Point central.
-     * @param largeur Largeur de l'ovale.
-     * @param hauteur Hauteur de l'ovale.
+     * @param Area_Width Area_Width de l'ovale.
+     * @param Area_Height Area_Height de l'ovale.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
      * @exception java.lang.RuntimeException Cette exception est lancée si on tente de construire un ovale avec des dimensions négatives.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      * @see Point
      */
-    public Ovale ( Point o, int largeur, int hauteur, boolean plein ) {
+    public Ovale ( Point o, int Area_Width, int Area_Height, boolean plein ) {
 
 	super ( Couleur.NOIR );
 
 	this.o = new Point ( o );
 
-	this.largeur = largeur;
-	this.hauteur = hauteur;
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un ovale de largeur négative : "+largeur);
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un ovale de hauteur négative : "+hauteur);
+	this.Area_Width = Area_Width;
+	this.Area_Height = Area_Height;
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un ovale de Area_Width négative : "+Area_Width);
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un ovale de Area_Height négative : "+Area_Height);
 
 	this.plein = plein;
     
@@ -132,7 +132,7 @@ public class Ovale extends Dessin {
     /**
      * Construit un ovale à partir d'un rectangle.<br />
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.<br />
-     * Le point central de l'ovale est défini comme étant le "centre" du rectangle (le croisement de ses diagonales). La hauteur et la largeur de l'ovale sont la hauteur et la largeur du rectangle.
+     * Le point central de l'ovale est défini comme étant le "centre" du rectangle (le croisement de ses diagonales). La Area_Height et la Area_Width de l'ovale sont la Area_Height et la Area_Width du rectangle.
      * @param r Rectangle.
      * @see Rectangle
      */
@@ -140,17 +140,17 @@ public class Ovale extends Dessin {
 
 	super ( Couleur.NOIR );
 
-	o = new Point ( r.getA().getX()+r.getLargeur()/2, r.getA().getY()+r.getHauteur()/2 );
+	o = new Point ( r.getA().getX()+r.getArea_Width()/2, r.getA().getY()+r.getArea_Height()/2 );
 
-	this.largeur = r.getLargeur();
-	this.hauteur = r.getHauteur();
-	// Inutile de vérifier la largeur et la hauteur car ces deux dimensions doivent être correctes dans un rectangle.
+	this.Area_Width = r.getArea_Width();
+	this.Area_Height = r.getArea_Height();
+	// Inutile de vérifier la Area_Width et la Area_Height car ces deux dimensions doivent être correctes dans un rectangle.
     }
 
     /**
      * Construit un ovale à partir d'un rectangle.<br />
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.<br />
-     * Le point central de l'ovale est défini comme étant le "centre" du rectangle (le croisement de ses diagonales). La hauteur et la largeur de l'ovale sont la hauteur et la largeur du rectangle.
+     * Le point central de l'ovale est défini comme étant le "centre" du rectangle (le croisement de ses diagonales). La Area_Height et la Area_Width de l'ovale sont la Area_Height et la Area_Width du rectangle.
      * @param r Rectangle.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
      * @see Rectangle
@@ -159,11 +159,11 @@ public class Ovale extends Dessin {
 
 	super ( Couleur.NOIR );
 
-	o = new Point ( r.getA().getX()+r.getLargeur()/2, r.getA().getY()+r.getHauteur()/2 );
+	o = new Point ( r.getA().getX()+r.getArea_Width()/2, r.getA().getY()+r.getArea_Height()/2 );
 
-	this.largeur = r.getLargeur();
-	this.hauteur = r.getHauteur();
-	// Inutile de vérifier la largeur et la hauteur car ces deux dimensions doivent être correctes dans un rectangle.
+	this.Area_Width = r.getArea_Width();
+	this.Area_Height = r.getArea_Height();
+	// Inutile de vérifier la Area_Width et la Area_Height car ces deux dimensions doivent être correctes dans un rectangle.
 
 	this.plein = plein;
     }
@@ -171,61 +171,61 @@ public class Ovale extends Dessin {
     // Avec couleur //
 
     /**
-     * Construit un ovale à partir d'un Point central, de sa largeur et de sa hauteur.
+     * Construit un ovale à partir d'un Point central, de sa Area_Width et de sa Area_Height.
      * @param couleur Couleur de l'objet.
      * @param o Point central.
-     * @param largeur Largeur de l'ovale.
-     * @param hauteur Hauteur de l'ovale.
+     * @param Area_Width Area_Width de l'ovale.
+     * @param Area_Height Area_Height de l'ovale.
      * @exception java.lang.RuntimeException Cette exception est lancée si on tente de construire un ovale avec des dimensions négatives.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      * @see Couleur
      * @see Point
      */
-    public Ovale ( Couleur couleur, Point o, int largeur, int hauteur ) {
+    public Ovale ( Couleur couleur, Point o, int Area_Width, int Area_Height ) {
 
 	super ( couleur );
 
 	this.o = new Point ( o );
 
-	this.largeur = largeur;
-	this.hauteur = hauteur;
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un ovale de largeur négative : "+largeur);
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un ovale de hauteur négative : "+hauteur);
+	this.Area_Width = Area_Width;
+	this.Area_Height = Area_Height;
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un ovale de Area_Width négative : "+Area_Width);
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un ovale de Area_Height négative : "+Area_Height);
     }
 
     /**
-     * Construit un ovale à partir d'un Point, de sa largeur et de sa hauteur.
+     * Construit un ovale à partir d'un Point, de sa Area_Width et de sa Area_Height.
      * @param couleur Couleur de l'objet.
      * @param o Point central.
-     * @param largeur Largeur de l'ovale.
-     * @param hauteur Hauteur de l'ovale.
+     * @param Area_Width Area_Width de l'ovale.
+     * @param Area_Height Area_Height de l'ovale.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
      * @exception java.lang.RuntimeException Cette exception est lancée si on tente de construire un ovale avec des dimensions négatives.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      * @see Couleur
      * @see Point
      */
-    public Ovale ( Couleur couleur, Point o, int largeur, int hauteur, boolean plein ) {
+    public Ovale ( Couleur couleur, Point o, int Area_Width, int Area_Height, boolean plein ) {
 
 	super ( couleur );
 
 	this.o = new Point ( o );
 
-	this.largeur = largeur;
-	this.hauteur = hauteur;
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un ovale de largeur négative : "+largeur);
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un ovale de hauteur négative : "+hauteur);
+	this.Area_Width = Area_Width;
+	this.Area_Height = Area_Height;
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un ovale de Area_Width négative : "+Area_Width);
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un ovale de Area_Height négative : "+Area_Height);
 
 	this.plein = plein;
     }
 
     /**
      * Construit un ovale à partir d'un rectangle.<br />
-     * Le point central de l'ovale est défini comme étant le "centre" du rectangle (le croisement de ses diagonales). La hauteur et la largeur de l'ovale sont la hauteur et la largeur du rectangle.
+     * Le point central de l'ovale est défini comme étant le "centre" du rectangle (le croisement de ses diagonales). La Area_Height et la Area_Width de l'ovale sont la Area_Height et la Area_Width du rectangle.
      * @param couleur Couleur de l'objet.
      * @param r Rectangle.
      * @see Couleur
@@ -235,16 +235,16 @@ public class Ovale extends Dessin {
 
 	super ( couleur );
 
-	o = new Point ( r.getA().getX()+r.getLargeur()/2, r.getA().getY()+r.getHauteur()/2 );
+	o = new Point ( r.getA().getX()+r.getArea_Width()/2, r.getA().getY()+r.getArea_Height()/2 );
 
-	this.largeur = r.getLargeur();
-	this.hauteur = r.getHauteur();
-	// Inutile de vérifier la largeur et la hauteur car ces deux dimensions doivent être correctes dans un rectangle.
+	this.Area_Width = r.getArea_Width();
+	this.Area_Height = r.getArea_Height();
+	// Inutile de vérifier la Area_Width et la Area_Height car ces deux dimensions doivent être correctes dans un rectangle.
     }
 
     /**
      * Construit un ovale à partir d'un rectangle.<br />
-     * Le point central de l'ovale est défini comme étant le "centre" du rectangle (le croisement de ses diagonales). La hauteur et la largeur de l'ovale sont la hauteur et la largeur du rectangle.
+     * Le point central de l'ovale est défini comme étant le "centre" du rectangle (le croisement de ses diagonales). La Area_Height et la Area_Width de l'ovale sont la Area_Height et la Area_Width du rectangle.
      * @param couleur Couleur de l'objet.
      * @param r Rectangle.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
@@ -255,11 +255,11 @@ public class Ovale extends Dessin {
 
 	super ( couleur );
 
-	o = new Point ( r.getA().getX()+r.getLargeur()/2, r.getA().getY()+r.getHauteur()/2 );
+	o = new Point ( r.getA().getX()+r.getArea_Width()/2, r.getA().getY()+r.getArea_Height()/2 );
 
-	this.largeur = r.getLargeur();
-	this.hauteur = r.getHauteur();
-	// Inutile de vérifier la largeur et la hauteur car ces deux dimensions doivent être correctes dans un rectangle.
+	this.Area_Width = r.getArea_Width();
+	this.Area_Height = r.getArea_Height();
+	// Inutile de vérifier la Area_Width et la Area_Height car ces deux dimensions doivent être correctes dans un rectangle.
 
 	this.plein = plein;
     }
@@ -278,21 +278,21 @@ public class Ovale extends Dessin {
     }
 
     /**
-     * Retourne la largeur de l'ovale.
-     * @return Largeur de l'ovale.
+     * Retourne la Area_Width de l'ovale.
+     * @return Area_Width de l'ovale.
      */
-    public int getLargeur () {
+    public int getArea_Width () {
 
-	return largeur;
+	return Area_Width;
     }
 
     /**
-     * Retourne la hauteur de l'ovale.
-     * @return Hauteur de l'ovale.
+     * Retourne la Area_Height de l'ovale.
+     * @return Area_Height de l'ovale.
      */
-    public int getHauteur () {
+    public int getArea_Height () {
 
-	return hauteur;
+	return Area_Height;
     }
 
     /**
@@ -312,8 +312,8 @@ public class Ovale extends Dessin {
      */
     public BoiteEnglobante getBoiteEnglobante () {
 
-	return new BoiteEnglobante ( new Point ( getO().getX() - largeur / 2, getO().getY() - hauteur / 2 ),
-				     new Point ( getO().getX() + largeur / 2, getO().getY() + hauteur / 2 )
+	return new BoiteEnglobante ( new Point ( getO().getX() - Area_Width / 2, getO().getY() - Area_Height / 2 ),
+				     new Point ( getO().getX() + Area_Width / 2, getO().getY() + Area_Height / 2 )
 				     );
     }
 
@@ -339,29 +339,29 @@ public class Ovale extends Dessin {
     }
 
     /**
-     * Permet d'attribuer une nouvelle largeur à l'ovale.<br />
+     * Permet d'attribuer une nouvelle Area_Width à l'ovale.<br />
      * Le point central ne bouge pas.
-     * @param largeur Largeur de l'Ovale.
+     * @param Area_Width Area_Width de l'Ovale.
      * @exception java.lang.RuntimeException Cette exception est lancée si on tente de construire un ovale avec des dimensions négatives.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public void setLargeur ( int largeur ) {
-	this.largeur = largeur;
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un ovale de largeur négative : "+largeur);
+    public void setArea_Width ( int Area_Width ) {
+	this.Area_Width = Area_Width;
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un ovale de Area_Width négative : "+Area_Width);
     }
 
     /**
-     * Permet d'attribuer une nouvelle hauteur à l'ovale.<br />
+     * Permet d'attribuer une nouvelle Area_Height à l'ovale.<br />
      * Le point central ne bouge pas.
-     * @param hauteur Hauteur de l'Ovale.
+     * @param Area_Height Area_Height de l'Ovale.
      * @exception java.lang.RuntimeException Cette exception est lancée si on tente de construire un ovale avec des dimensions négatives.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public void setHauteur ( int hauteur ) {
-	this.hauteur = hauteur;
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un ovale de hauteur négative : "+hauteur);
+    public void setArea_Height ( int Area_Height ) {
+	this.Area_Height = Area_Height;
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un ovale de Area_Height négative : "+Area_Height);
     }
 
     /**
@@ -387,10 +387,10 @@ public class Ovale extends Dessin {
 	g.setColor ( this.getCouleur() );
 
 	if ( plein )
-	    g.fillOval ( ( o.getX() - largeur / 2 ), ( (int)g.getClipBounds().getHeight()-o.getY() - hauteur / 2 ), largeur, hauteur );
+	    g.fillOval ( ( o.getX() - Area_Width / 2 ), ( (int)g.getClipBounds().getHeight()-o.getY() - Area_Height / 2 ), Area_Width, Area_Height );
 
 	else
-	    g.drawOval ( ( o.getX() - largeur / 2 ), ( (int)g.getClipBounds().getHeight()-o.getY() - hauteur / 2 ), largeur, hauteur );
+	    g.drawOval ( ( o.getX() - Area_Width / 2 ), ( (int)g.getClipBounds().getHeight()-o.getY() - Area_Height / 2 ), Area_Width, Area_Height );
     }
 
     // Intersections //
@@ -421,11 +421,11 @@ public class Ovale extends Dessin {
 
     /**
      * Méthode toString retournant une descirption de l'ovale.<br />
-     * La chaine de caractères retournée est de la forme "Ovale de centre (x1,y1), de largeur l et de hauteur h".
+     * La chaine de caractères retournée est de la forme "Ovale de centre (x1,y1), de Area_Width l et de Area_Height h".
      * @return Une chaîne de caractères décrivant l'ovale.
      */
     public String toString(){
-	return new String("Ovale de centre "+getO()+", de largeur "+getLargeur()+" et de hauteur "+getHauteur());
+	return new String("Ovale de centre "+getO()+", de Area_Width "+getArea_Width()+" et de Area_Height "+getArea_Height());
     }
 
     /**
@@ -441,7 +441,7 @@ public class Ovale extends Dessin {
         if (obj instanceof Ovale) {
             // Vérification des valeurs des attributs
              Ovale other = (Ovale) obj;
-	     return super.equals(other) && o.equals(other.o) && largeur==other.largeur && hauteur==other.hauteur && plein==other.plein;
+	     return super.equals(other) && o.equals(other.o) && Area_Width==other.Area_Width && Area_Height==other.Area_Height && plein==other.plein;
 	}
 	return false;
     }

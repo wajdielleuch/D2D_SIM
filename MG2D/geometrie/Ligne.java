@@ -379,7 +379,7 @@ public class Ligne extends Dessin {
 	int denominateur = ( int ) Math.sqrt ( ux * ux + uy * uy );
 	int ci = numerateur / denominateur;
 
-	if ( ci < c.getRayon() )
+	if ( ci < c.gettransmission_range() )
 	    collision = true;
 
 	return collision;

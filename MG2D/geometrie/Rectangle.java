@@ -43,7 +43,7 @@ public class Rectangle extends Dessin {
     private Point a;	// Point ( x min, y min ) //
     private Point b;	// Point ( x max, y max ) //
 
-    private int arcLargeur = 0, arcHauteur = 0;
+    private int arcArea_Width = 0, arcArea_Height = 0;
 
     private boolean plein = false;		// Détermine si le rectangle est plein ou non //
 
@@ -69,8 +69,8 @@ public class Rectangle extends Dessin {
 	a = new Point ( r.getA().getX(), r.getA().getY() );
 	b = new Point ( r.getB().getX(), r.getB().getY() );
 
-	arcLargeur = r.getArcLargeur();
-	arcHauteur = r.getArcHauteur();
+	arcArea_Width = r.getArcArea_Width();
+	arcArea_Height = r.getArcArea_Height();
 
 	plein = r.getPlein();
     }
@@ -121,12 +121,12 @@ public class Rectangle extends Dessin {
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.
      * @param a Coin bas gauche.
      * @param b Coin haut droit.
-     * @param arcLargeur Arrondis en largeur.
-     * @param arcHauteur Arrondis en hauteur.
+     * @param arcArea_Width Arrondis en Area_Width.
+     * @param arcArea_Height Arrondis en Area_Height.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public Rectangle ( Point a, Point b, int arcLargeur, int arcHauteur ) {
+    public Rectangle ( Point a, Point b, int arcArea_Width, int arcArea_Height ) {
 
 	super ( Couleur.NOIR );
 
@@ -135,12 +135,12 @@ public class Rectangle extends Dessin {
 	if(a.getX()>b.getX() || a.getY()>b.getY())
 	    throw new java.lang.RuntimeException("Impossible de créer un rectangle dont le coin bas gauche se trouve au dessus ou à droite du coin haut droite. Coin bas gauche : "+a+". Coin haut droit : "+b);
 
-	this.arcLargeur = arcLargeur;
-	this.arcHauteur = arcHauteur;
-	if(arcLargeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en largeur de "+arcLargeur);
-	if(arcHauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en hauteur de "+arcHauteur);
+	this.arcArea_Width = arcArea_Width;
+	this.arcArea_Height = arcArea_Height;
+	if(arcArea_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Width de "+arcArea_Width);
+	if(arcArea_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Height de "+arcArea_Height);
     }
 
     /**
@@ -148,13 +148,13 @@ public class Rectangle extends Dessin {
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.
      * @param a Coin bas gauche.
      * @param b Coin haut droit.
-     * @param arcLargeur Arrondis en largeur.
-     * @param arcHauteur Arrondis en hauteur.
+     * @param arcArea_Width Arrondis en Area_Width.
+     * @param arcArea_Height Arrondis en Area_Height.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public Rectangle ( Point a, Point b, int arcLargeur, int arcHauteur, boolean plein ) {
+    public Rectangle ( Point a, Point b, int arcArea_Width, int arcArea_Height, boolean plein ) {
 
 	super ( Couleur.NOIR );
 
@@ -163,120 +163,120 @@ public class Rectangle extends Dessin {
 	if(a.getX()>b.getX() || a.getY()>b.getY())
 	    throw new java.lang.RuntimeException("Impossible de créer un rectangle dont le coin bas gauche se trouve au dessus ou à droite du coin haut droite. Coin bas gauche : "+a+". Coin haut droit : "+b);
 
-	this.arcLargeur = arcLargeur;
-	this.arcHauteur = arcHauteur;
-	if(arcLargeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en largeur de "+arcLargeur);
-	if(arcHauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en hauteur de "+arcHauteur);
+	this.arcArea_Width = arcArea_Width;
+	this.arcArea_Height = arcArea_Height;
+	if(arcArea_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Width de "+arcArea_Width);
+	if(arcArea_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Height de "+arcArea_Height);
 
 	this.plein = plein;
     }
 
     /**
-     * Construit un Rectangle à partir d'un Point, de sa largeur et de sa hauteur.<br />
+     * Construit un Rectangle à partir d'un Point, de sa Area_Width et de sa Area_Height.<br />
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.
      * @param a Coin bas gauche.
-     * @param largeur Largeur du rectangle.
-     * @param hauteur Hauteur du rectangle.
+     * @param Area_Width Area_Width du rectangle.
+     * @param Area_Height Area_Height du rectangle.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public Rectangle ( Point a, int largeur, int hauteur ) {
+    public Rectangle ( Point a, int Area_Width, int Area_Height ) {
 
 	super ( Couleur.NOIR );
 
         this.a = new Point ( a );
-        b = new Point ( ( a.getX() + largeur ), ( a.getY() + hauteur ) );
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de largeur négative : "+largeur);
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de hauteur négative : "+hauteur);
+        b = new Point ( ( a.getX() + Area_Width ), ( a.getY() + Area_Height ) );
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Width négative : "+Area_Width);
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Height négative : "+Area_Height);
     }
 
     /**
-     * Construit un Rectangle plein à partir d'un Point, de sa largeur et de sa hauteur.<br />
+     * Construit un Rectangle plein à partir d'un Point, de sa Area_Width et de sa Area_Height.<br />
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.
      * @param a Coin bas gauche.
-     * @param largeur Largeur du rectangle.
-     * @param hauteur Hauteur du rectangle.
+     * @param Area_Width Area_Width du rectangle.
+     * @param Area_Height Area_Height du rectangle.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public Rectangle ( Point a, int largeur, int hauteur, boolean plein ) {
+    public Rectangle ( Point a, int Area_Width, int Area_Height, boolean plein ) {
 
 	super ( Couleur.NOIR );
 
         this.a = new Point ( a );
-        b = new Point ( ( a.getX() + largeur ), ( a.getY() + hauteur ) );
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de largeur négative : "+largeur);
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de hauteur négative : "+hauteur);
+        b = new Point ( ( a.getX() + Area_Width ), ( a.getY() + Area_Height ) );
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Width négative : "+Area_Width);
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Height négative : "+Area_Height);
 
         this.plein = plein;
     }
 
     /**
-     * Construit un Rectangle dont les bords sont arrondis à partir d'un Point, de sa largeur, de sa hauteur et des arrondis.<br />
+     * Construit un Rectangle dont les bords sont arrondis à partir d'un Point, de sa Area_Width, de sa Area_Height et des arrondis.<br />
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.
      * @param a Coin bas gauche.
-     * @param largeur Largeur du rectangle.
-     * @param hauteur Hauteur du rectangler.
-     * @param arcLargeur Arrondis en largeur.
-     * @param arcHauteur Arrondis en hauteur.
+     * @param Area_Width Area_Width du rectangle.
+     * @param Area_Height Area_Height du rectangler.
+     * @param arcArea_Width Arrondis en Area_Width.
+     * @param arcArea_Height Arrondis en Area_Height.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public Rectangle ( Point a, int largeur, int hauteur, int arcLargeur, int arcHauteur ) {
+    public Rectangle ( Point a, int Area_Width, int Area_Height, int arcArea_Width, int arcArea_Height ) {
 
 	super ( Couleur.NOIR );
 
 	this.a = new Point ( a );
-	b = new Point ( ( a.getX() + largeur ), ( a.getY() + hauteur ) );
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de largeur négative : "+largeur);
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de hauteur négative : "+hauteur);
+	b = new Point ( ( a.getX() + Area_Width ), ( a.getY() + Area_Height ) );
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Width négative : "+Area_Width);
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Height négative : "+Area_Height);
 
-	this.arcLargeur = arcLargeur;
-	this.arcHauteur = arcHauteur;
-	if(arcLargeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en largeur de "+arcLargeur);
-	if(arcHauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en hauteur de "+arcHauteur);
+	this.arcArea_Width = arcArea_Width;
+	this.arcArea_Height = arcArea_Height;
+	if(arcArea_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Width de "+arcArea_Width);
+	if(arcArea_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Height de "+arcArea_Height);
     }
 
     /**
-     * Construit un Rectangle plein dont les bords sont arrondis à partir d'un Point, de sa largeur, de sa hauteur et des arrondis.<br />
+     * Construit un Rectangle plein dont les bords sont arrondis à partir d'un Point, de sa Area_Width, de sa Area_Height et des arrondis.<br />
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.
      * @param a Coin bas gauche.
-     * @param largeur Largeur du Rectangle.
-     * @param hauteur Hauteur du Rectangle.
-     * @param arcLargeur Arrondis en largeur.
-     * @param arcHauteur Arrondis en hauteur.
+     * @param Area_Width Area_Width du Rectangle.
+     * @param Area_Height Area_Height du Rectangle.
+     * @param arcArea_Width Arrondis en Area_Width.
+     * @param arcArea_Height Arrondis en Area_Height.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public Rectangle ( Point a, int largeur, int hauteur, int arcLargeur, int arcHauteur, boolean plein ) {
+    public Rectangle ( Point a, int Area_Width, int Area_Height, int arcArea_Width, int arcArea_Height, boolean plein ) {
 
 	super ( Couleur.NOIR );
 
 	this.a = new Point ( a );
-	b = new Point ( ( a.getX() + largeur ), ( a.getY() + hauteur ) );
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de largeur négative : "+largeur);
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de hauteur négative : "+hauteur);
+	b = new Point ( ( a.getX() + Area_Width ), ( a.getY() + Area_Height ) );
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Width négative : "+Area_Width);
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Height négative : "+Area_Height);
 
-	this.arcLargeur = arcLargeur;
-	this.arcHauteur = arcHauteur;
-	if(arcLargeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en largeur de "+arcLargeur);
-	if(arcHauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en hauteur de "+arcHauteur);
+	this.arcArea_Width = arcArea_Width;
+	this.arcArea_Height = arcArea_Height;
+	if(arcArea_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Width de "+arcArea_Width);
+	if(arcArea_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Height de "+arcArea_Height);
 
         this.plein = plein;
     }
@@ -327,12 +327,12 @@ public class Rectangle extends Dessin {
      * @param couleur Couleur de l'objet.
      * @param a Coin bas gauche.
      * @param b Coin haut droit.
-     * @param arcLargeur Arrondis en largeur.
-     * @param arcHauteur Arrondis en hauteur.
+     * @param arcArea_Width Arrondis en Area_Width.
+     * @param arcArea_Height Arrondis en Area_Height.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public Rectangle ( Couleur couleur, Point a, Point b, int arcLargeur, int arcHauteur ) {
+    public Rectangle ( Couleur couleur, Point a, Point b, int arcArea_Width, int arcArea_Height ) {
 
 	super ( couleur );
 
@@ -341,12 +341,12 @@ public class Rectangle extends Dessin {
 	if(a.getX()>b.getX() || a.getY()>b.getY())
 	    throw new java.lang.RuntimeException("Impossible de créer un rectangle dont le coin bas gauche se trouve au dessus ou à droite du coin haut droite. Coin bas gauche : "+a+". Coin haut droit : "+b);
 
-	this.arcLargeur = arcLargeur;
-	this.arcHauteur = arcHauteur;
-	if(arcLargeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en largeur de "+arcLargeur);
-	if(arcHauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en hauteur de "+arcHauteur);
+	this.arcArea_Width = arcArea_Width;
+	this.arcArea_Height = arcArea_Height;
+	if(arcArea_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Width de "+arcArea_Width);
+	if(arcArea_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Height de "+arcArea_Height);
     }
 
     /**
@@ -354,13 +354,13 @@ public class Rectangle extends Dessin {
      * @param couleur Couleur de l'objet.
      * @param a Coin bas gauche.
      * @param b Coin haut droit.
-     * @param arcLargeur Arrondis en largeur.
-     * @param arcHauteur Arrondis en hauteur.
+     * @param arcArea_Width Arrondis en Area_Width.
+     * @param arcArea_Height Arrondis en Area_Height.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public Rectangle ( Couleur couleur, Point a, Point b, int arcLargeur, int arcHauteur, boolean plein ) {
+    public Rectangle ( Couleur couleur, Point a, Point b, int arcArea_Width, int arcArea_Height, boolean plein ) {
 
 	super ( couleur );
 
@@ -369,121 +369,121 @@ public class Rectangle extends Dessin {
 	if(a.getX()>b.getX() || a.getY()>b.getY())
 	    throw new java.lang.RuntimeException("Impossible de créer un rectangle dont le coin bas gauche se trouve au dessus ou à droite du coin haut droite. Coin bas gauche : "+a+". Coin haut droit : "+b);
 
-	this.arcLargeur = arcLargeur;
-	this.arcHauteur = arcHauteur;
-	if(arcLargeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en largeur de "+arcLargeur);
-	if(arcHauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en hauteur de "+arcHauteur);
+	this.arcArea_Width = arcArea_Width;
+	this.arcArea_Height = arcArea_Height;
+	if(arcArea_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Width de "+arcArea_Width);
+	if(arcArea_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Height de "+arcArea_Height);
 
 	this.plein = plein;
 
     }
 
     /**
-     * Construit un rectangle à partir d'un Point, de sa largeur et de sa hauteur.
+     * Construit un rectangle à partir d'un Point, de sa Area_Width et de sa Area_Height.
      * @param couleur Couleur de l'objet.
      * @param a Coin bas gauche.
-     * @param largeur Largeur du Rectangle.
-     * @param hauteur Hauteur du Rectangle.
+     * @param Area_Width Area_Width du Rectangle.
+     * @param Area_Height Area_Height du Rectangle.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public Rectangle ( Couleur couleur, Point a, int largeur, int hauteur ) {
+    public Rectangle ( Couleur couleur, Point a, int Area_Width, int Area_Height ) {
 
 	super ( couleur );
 
 	this.a = new Point ( a );
-	b = new Point ( ( a.getX() + largeur ), ( a.getY() + hauteur ) );
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de largeur négative : "+largeur);
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de hauteur négative : "+hauteur);
+	b = new Point ( ( a.getX() + Area_Width ), ( a.getY() + Area_Height ) );
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Width négative : "+Area_Width);
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Height négative : "+Area_Height);
     }
 
     /**
-     * Construit un Rectangle plein à partir d'un Point, de sa largeur et de sa hauteur.
+     * Construit un Rectangle plein à partir d'un Point, de sa Area_Width et de sa Area_Height.
      * @param couleur Couleur de l'objet.
      * @param a Coin bas gauche.
-     * @param largeur Largeur du Rectangle.
-     * @param hauteur Hauteur du Rectangle.
+     * @param Area_Width Area_Width du Rectangle.
+     * @param Area_Height Area_Height du Rectangle.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public Rectangle ( Couleur couleur, Point a, int largeur, int hauteur, boolean plein ) {
+    public Rectangle ( Couleur couleur, Point a, int Area_Width, int Area_Height, boolean plein ) {
 
 	super ( couleur );
 
 	this.a = new Point ( a );
-	b = new Point ( ( a.getX() + largeur ), ( a.getY() + hauteur ) );
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de largeur négative : "+largeur);
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de hauteur négative : "+hauteur);
+	b = new Point ( ( a.getX() + Area_Width ), ( a.getY() + Area_Height ) );
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Width négative : "+Area_Width);
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Height négative : "+Area_Height);
 
         this.plein = plein;
     }
 
     /**
-     * Construit un Rectangle dont les bords sont arrondis à partir d'un Point, de sa largeur, de sa hauteur et de ses arrondis.
+     * Construit un Rectangle dont les bords sont arrondis à partir d'un Point, de sa Area_Width, de sa Area_Height et de ses arrondis.
      * @param couleur Couleur de l'objet.
      * @param a Coin bas gauche.
-     * @param largeur Largeur du Rectangle.
-     * @param hauteur Hauteur du Rectangler.
-     * @param arcLargeur Arrondis en largeur.
-     * @param arcHauteur Arrondis en hauteur.
+     * @param Area_Width Area_Width du Rectangle.
+     * @param Area_Height Area_Height du Rectangler.
+     * @param arcArea_Width Arrondis en Area_Width.
+     * @param arcArea_Height Arrondis en Area_Height.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public Rectangle ( Couleur couleur, Point a, int largeur, int hauteur, int arcLargeur, int arcHauteur ) {
+    public Rectangle ( Couleur couleur, Point a, int Area_Width, int Area_Height, int arcArea_Width, int arcArea_Height ) {
 
 	super ( couleur );
 
 	this.a = new Point ( a );
-	b = new Point ( ( a.getX() + largeur ), ( a.getY() + hauteur ) );
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de largeur négative : "+largeur);
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de hauteur négative : "+hauteur);
+	b = new Point ( ( a.getX() + Area_Width ), ( a.getY() + Area_Height ) );
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Width négative : "+Area_Width);
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Height négative : "+Area_Height);
 
-	this.arcLargeur = arcLargeur;
-	this.arcHauteur = arcHauteur;
-	if(arcLargeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en largeur de "+arcLargeur);
-	if(arcHauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en hauteur de "+arcHauteur);
+	this.arcArea_Width = arcArea_Width;
+	this.arcArea_Height = arcArea_Height;
+	if(arcArea_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Width de "+arcArea_Width);
+	if(arcArea_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Height de "+arcArea_Height);
     }
 
     /**
-     * Construit un Rectangle plein dont les bords sont arrondis à partir d'un Point, de sa largeur, de sa hauteur et de ses arrondis.
+     * Construit un Rectangle plein dont les bords sont arrondis à partir d'un Point, de sa Area_Width, de sa Area_Height et de ses arrondis.
      * @param couleur Couleur de l'objet.
      * @param a Coin bas gauche.
-     * @param largeur Largeur du Rectangle.
-     * @param hauteur Hauteur du Rectangle.
-     * @param arcLargeur Arrondis en largeur.
-     * @param arcHauteur Arrondis en hauteur.
+     * @param Area_Width Area_Width du Rectangle.
+     * @param Area_Height Area_Height du Rectangle.
+     * @param arcArea_Width Arrondis en Area_Width.
+     * @param arcArea_Height Arrondis en Area_Height.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public Rectangle ( Couleur couleur, Point a, int largeur, int hauteur, int arcLargeur, int arcHauteur, boolean plein ) {
+    public Rectangle ( Couleur couleur, Point a, int Area_Width, int Area_Height, int arcArea_Width, int arcArea_Height, boolean plein ) {
 
 	super ( couleur );
 
 	this.a = new Point ( a );
-	b = new Point ( ( a.getX() + largeur ), ( a.getY() + hauteur ) );
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de largeur négative : "+largeur);
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de hauteur négative : "+hauteur);
+	b = new Point ( ( a.getX() + Area_Width ), ( a.getY() + Area_Height ) );
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Width négative : "+Area_Width);
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Height négative : "+Area_Height);
 
-	this.arcLargeur = arcLargeur;
-	this.arcHauteur = arcHauteur;
-	if(arcLargeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en largeur de "+arcLargeur);
-	if(arcHauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en hauteur de "+arcHauteur);
+	this.arcArea_Width = arcArea_Width;
+	this.arcArea_Height = arcArea_Height;
+	if(arcArea_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Width de "+arcArea_Width);
+	if(arcArea_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Height de "+arcArea_Height);
 
         this.plein = plein;
     }
@@ -511,39 +511,39 @@ public class Rectangle extends Dessin {
     }
 
     /**
-     * Retourne la largeur du rectangle.
-     * @return Largeur du rectangle.
+     * Retourne la Area_Width du rectangle.
+     * @return Area_Width du rectangle.
      */
-    public int getLargeur () {
+    public int getArea_Width () {
 
 	return ( b.getX() - a.getX() );
     }
 
     /**
-     * Retourne la hauteur du rectangle.
-     * @return Hauteur du rectangle.
+     * Retourne la Area_Height du rectangle.
+     * @return Area_Height du rectangle.
      */
-    public int getHauteur () {
+    public int getArea_Height () {
 
 	return ( b.getY() - a.getY() );
     }
 
     /**
-     * Retourne la valeur de l'arrondi en largeur.
-     * @return Arrondis en largeur.
+     * Retourne la valeur de l'arrondi en Area_Width.
+     * @return Arrondis en Area_Width.
      */
-    public int getArcLargeur () {
+    public int getArcArea_Width () {
 
-	return arcLargeur;
+	return arcArea_Width;
     }
 
     /**
-     * Retourne la valeur de l'arrondi en hauteur.
-     * @return Arrondis en hauteur.
+     * Retourne la valeur de l'arrondi en Area_Height.
+     * @return Arrondis en Area_Height.
      */
-    public int getArcHauteur () {
+    public int getArcArea_Height () {
 
-	return arcHauteur;
+	return arcArea_Height;
     }
 
     /**
@@ -552,7 +552,7 @@ public class Rectangle extends Dessin {
      */
     public boolean getArrondi () {
 
-	return (arcLargeur>0 || arcHauteur>0);
+	return (arcArea_Width>0 || arcArea_Height>0);
     }
 
     /**
@@ -613,29 +613,29 @@ public class Rectangle extends Dessin {
     }
 
     /**
-     * Permet d'attribuer une valeur à arcLargeur.
-     * @param arcLargeur Valeur de l'arrondi en largeur.
+     * Permet d'attribuer une valeur à arcArea_Width.
+     * @param arcArea_Width Valeur de l'arrondi en Area_Width.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public void setArcLargeur ( int arcLargeur ) {
+    public void setArcArea_Width ( int arcArea_Width ) {
 
-	this.arcLargeur = arcLargeur;
-	if(arcLargeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en largeur de "+arcLargeur);
+	this.arcArea_Width = arcArea_Width;
+	if(arcArea_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Width de "+arcArea_Width);
     }
 
     /**
-     * Permet d'attribuer une valeur à arcHauteur
-     * @param arcHauteur Valeur de l'arrondi en hauteur.
+     * Permet d'attribuer une valeur à arcArea_Height
+     * @param arcArea_Height Valeur de l'arrondi en Area_Height.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public void setArcHauteur ( int arcHauteur ) {
+    public void setArcArea_Height ( int arcArea_Height ) {
 
-	this.arcHauteur = arcHauteur;
-	if(arcHauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en hauteur de "+arcHauteur);
+	this.arcArea_Height = arcArea_Height;
+	if(arcArea_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un arrondi en Area_Height de "+arcArea_Height);
     }
 
     /**
@@ -648,45 +648,45 @@ public class Rectangle extends Dessin {
     }
 
     /**
-     * Permet la modification de la hauteur du rectangle.<br />
+     * Permet la modification de la Area_Height du rectangle.<br />
      * Le coin bas gache ne bouge pas. C'est le coin aut droit qui est déplacé pour prendre en compte la nouvelle taille du rectangle.
-     * @param hauteur Nouvelle hauteur du rectangle.
+     * @param Area_Height Nouvelle Area_Height du rectangle.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public void setHauteur(int hauteur){
-	b = new Point ( getB().getX(), getA().getY() + hauteur ) ;
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de hauteur négative : "+hauteur);
+    public void setArea_Height(int Area_Height){
+	b = new Point ( getB().getX(), getA().getY() + Area_Height ) ;
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Height négative : "+Area_Height);
     }
 
     /**
-     * Permet la modification de la largeur du rectangle.<br />
+     * Permet la modification de la Area_Width du rectangle.<br />
      * Le coin bas gache ne bouge pas. C'est le coin aut droit qui est déplacé pour prendre en compte la nouvelle taille du rectangle.
-     * @param largeur Nouvelle largeur du rectangle.
+     * @param Area_Width Nouvelle Area_Width du rectangle.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public void setLargeur(int largeur){
-	b = new Point ( getA().getX() + largeur, getB().getY() ) ;
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de largeur négative : "+largeur);
+    public void setArea_Width(int Area_Width){
+	b = new Point ( getA().getX() + Area_Width, getB().getY() ) ;
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Width négative : "+Area_Width);
     }
 
     /**
      * Permet la modification de la taille du rectangle.<br />
      * Le coin bas gache ne bouge pas. C'est le coin aut droit qui est déplacé pour prendre en compte la nouvelle taille du rectangle.
-     * @param largeur Nouvelle largeur du rectangle.
-     * @param hauteur Nouvelle hauteur du rectangle.
+     * @param Area_Width Nouvelle Area_Width du rectangle.
+     * @param Area_Height Nouvelle Area_Height du rectangle.
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un rectangle avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public void setTaille(int largeur, int hauteur){
-	b = new Point ( getA().getX() + largeur, getA().getY() + hauteur ) ;
-	if(largeur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de largeur négative : "+largeur);
-	if(hauteur<0)
-	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de hauteur négative : "+hauteur);
+    public void setTaille(int Area_Width, int Area_Height){
+	b = new Point ( getA().getX() + Area_Width, getA().getY() + Area_Height ) ;
+	if(Area_Width<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Width négative : "+Area_Width);
+	if(Area_Height<0)
+	    throw new java.lang.RuntimeException("Impossible de créer un rectangle de Area_Height négative : "+Area_Height);
     }
 
     // Méthodes //
@@ -703,16 +703,16 @@ public class Rectangle extends Dessin {
 	g.setColor ( getCouleur() );
 
 	if ( getArrondi() && plein )
-	    g.fillRoundRect ( a.getX(), (int)g.getClipBounds().getHeight()-a.getY()-getHauteur(), getLargeur(), getHauteur(), arcLargeur, arcHauteur );
+	    g.fillRoundRect ( a.getX(), (int)g.getClipBounds().getHeight()-a.getY()-getArea_Height(), getArea_Width(), getArea_Height(), arcArea_Width, arcArea_Height );
 
 	else if ( getArrondi() )
-	    g.drawRoundRect ( a.getX(), (int)g.getClipBounds().getHeight()-a.getY()-getHauteur(), getLargeur(), getHauteur(), arcLargeur, arcHauteur );
+	    g.drawRoundRect ( a.getX(), (int)g.getClipBounds().getHeight()-a.getY()-getArea_Height(), getArea_Width(), getArea_Height(), arcArea_Width, arcArea_Height );
 
 	else if ( plein )
-	    g.fillRect ( a.getX(), (int)g.getClipBounds().getHeight()-a.getY()-getHauteur(), getLargeur(), getHauteur() );
+	    g.fillRect ( a.getX(), (int)g.getClipBounds().getHeight()-a.getY()-getArea_Height(), getArea_Width(), getArea_Height() );
 
 	else
-	    g.drawRect ( a.getX(), (int)g.getClipBounds().getHeight()-a.getY()-getHauteur(), getLargeur(), getHauteur() );
+	    g.drawRect ( a.getX(), (int)g.getClipBounds().getHeight()-a.getY()-getArea_Height(), getArea_Width(), getArea_Height() );
     }
 
     // Intersections //
@@ -778,16 +778,16 @@ public class Rectangle extends Dessin {
 	if ( x < a.getX() )
 	    x = a.getX();
 
-	if ( x > ( a.getX() + getLargeur() ) )
-	    x = ( a.getX() + getLargeur() );
+	if ( x > ( a.getX() + getArea_Width() ) )
+	    x = ( a.getX() + getArea_Width() );
 
 	if ( y <  a.getY() )
 	    y = a.getY();
 
-	if ( y > ( a.getY() + getHauteur() ) )
-	    y = ( a.getY() + getHauteur() );
+	if ( y > ( a.getY() + getArea_Height() ) )
+	    y = ( a.getY() + getArea_Height() );
 
-	if ( ( c.getO().getX() - x ) * ( c.getO().getX() - x ) + ( c.getO().getY() - y ) * ( c.getO().getY() - y ) < c.getRayon() * c.getRayon() )
+	if ( ( c.getO().getX() - x ) * ( c.getO().getX() - x ) + ( c.getO().getY() - y ) * ( c.getO().getY() - y ) < c.gettransmission_range() * c.gettransmission_range() )
 	    collision = true;
 
 	return collision;
@@ -859,7 +859,7 @@ public class Rectangle extends Dessin {
         if (obj instanceof Rectangle) {
             // Vérification des valeurs des attributs
 	    Rectangle other = (Rectangle) obj;
-	    return super.equals(other) && a.equals(other.a) && b.equals(other.b) && arcLargeur==other.arcLargeur && arcHauteur==other.arcHauteur && plein==other.plein;
+	    return super.equals(other) && a.equals(other.a) && b.equals(other.b) && arcArea_Width==other.arcArea_Width && arcArea_Height==other.arcArea_Height && plein==other.plein;
 	}
 	return false;
     }

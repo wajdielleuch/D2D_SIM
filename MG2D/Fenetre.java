@@ -43,7 +43,7 @@ import javax.imageio.ImageIO;
  * Cette classe crée une fenêtre comportant une zone d'affichage aux dimensions précisées.
  * <br /><br />
  * L'origine, le point (0,0) se trouve en bas à gauche de la zone d'affichage.<br />
- * L'utilisateur peut définir un titre, une largeur et une hauteur à cette fenêtre.<br />
+ * L'utilisateur peut définir un titre, une Area_Width et une Area_Height à cette fenêtre.<br />
  * Par la suite, il pourra, au travers de cette classe, gérer un ensemble de formes affichés.
  * @author Equipe 2D, Rémi Synave
  * @version 2.9
@@ -85,7 +85,7 @@ public class Fenetre extends JFrame {
 	d = new Dimension ( 800, 600 );
 	p = new Panneau ();
 
-	p.setPreferredSize ( d ); // On indique que l'on souhaite avoir un Panneau de la Dimension (largeur, hauteur) //
+	p.setPreferredSize ( d ); // On indique que l'on souhaite avoir un Panneau de la Dimension (Area_Width, Area_Height) //
 
 	this.setContentPane ( p );
 
@@ -117,25 +117,25 @@ public class Fenetre extends JFrame {
     }
 
     /**
-     * Crée une fenêtre possédant un titre, une largeur et une hauteur.
+     * Crée une fenêtre possédant un titre, une Area_Width et une Area_Height.
      * <br /><br />
      * Attention, la taille précisée en paramètre correspond à la taille de la zone d'affichage. La taille de la fenêtre sera légérement plus grande.<br />
      * <br /><br />
      * Par défaut, la fenêtre est centrée et ne peut pas être redimensionnée.
      * @param ttitre Titre de la Fenetre.
-     * @param largeur Largeur de l'espace de travail.
-     * @param hauteur Hauteur de l'espace de travail.
+     * @param Area_Width Area_Width de l'espace de travail.
+     * @param Area_Height Area_Height de l'espace de travail.
      */
-    public Fenetre ( String ttitre, int largeur, int hauteur ) {
+    public Fenetre ( String ttitre, int Area_Width, int Area_Height ) {
 
 	//Non instanciation du clavier et de la souris
 	c=null;
 	s=null;
 
-	d = new Dimension ( largeur, hauteur );
+	d = new Dimension ( Area_Width, Area_Height );
 	p = new Panneau ();
 
-	p.setPreferredSize ( d ); // On indique que l'on souhaite avoir un Panneau de la Dimension (largeur, hauteur) //
+	p.setPreferredSize ( d ); // On indique que l'on souhaite avoir un Panneau de la Dimension (Area_Width, Area_Height) //
 
 	this.setContentPane ( p );
 

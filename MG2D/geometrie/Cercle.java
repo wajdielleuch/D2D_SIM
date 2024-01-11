@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 /**
  * Cette classe permet la création de cercles.<br />
- * Cette classe est un cas particulier de la classe Ovale. Un ovale est décrit grâce à un point central, une largeur et une hauteur. Le cercle est décrit grâce à un point central et un diamètre (largeur=hauteur).<br />
+ * Cette classe est un cas particulier de la classe Ovale. Un ovale est décrit grâce à un point central, une Area_Width et une Area_Height. Le cercle est décrit grâce à un point central et un diamètre (Area_Width=Area_Height).<br />
  * <br /><br />
  * Elle hérite de la classe Ovale afin que toutes les méthodes de la classe Ovale s'applique également à celle-ci.
  * @author Equipe 2D, Rémi Synave
@@ -46,7 +46,7 @@ public class Cercle extends Ovale {
     // Constructeur //
 
     /**
-     * Construit un cercle noir centré en (1,1) et de rayon 1.
+     * Construit un cercle noir centré en (1,1) et de transmission_range 1.
      */
     public Cercle(){
 	super(new Point(1,1),2,2);
@@ -70,28 +70,28 @@ public class Cercle extends Ovale {
     // Sans couleur //
 
     /**
-     * Construit un Cercle à partir d'un Point et d'un rayon.<br />
+     * Construit un Cercle à partir d'un Point et d'un transmission_range.<br />
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.
      * @param o Point correspondant au centre du Cercle.
-     * @param rayon int correspondant au rayon du Cercle.
+     * @param transmission_range int correspondant au transmission_range du Cercle.
      * @see Point
      */
-    public Cercle ( Point o, int rayon ) {
+    public Cercle ( Point o, int transmission_range ) {
 
-	super ( o, rayon*2, rayon*2 );
+	super ( o, transmission_range*2, transmission_range*2 );
     }
 
     /**
-     * Construit un Cercle à partir d'un Point et d'un rayon.<br />
+     * Construit un Cercle à partir d'un Point et d'un transmission_range.<br />
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.
      * @param o Point correspondant au centre du Cercle.
-     * @param rayon int correspondant au rayon du Cercle.
+     * @param transmission_range int correspondant au transmission_range du Cercle.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
      * @see Point
      */
-    public Cercle ( Point o, int rayon, boolean plein ) {
+    public Cercle ( Point o, int transmission_range, boolean plein ) {
 
-	super ( o, rayon*2, rayon*2, plein );
+	super ( o, transmission_range*2, transmission_range*2, plein );
     array_User_Inrange = new ArrayList<>();
 
     }
@@ -133,31 +133,31 @@ public class Cercle extends Ovale {
     // Avec couleur //
 
     /**
-     * Construit un cercle à partir d'un Point, d'un rayon et d'une couleur.<br />
+     * Construit un cercle à partir d'un Point, d'un transmission_range et d'une couleur.<br />
      * @param couleur Couleur de l'objet.
      * @param o Point correspondant au centre du Cercle.
-     * @param rayon Rayon du Cercle.
+     * @param transmission_range transmission_range du Cercle.
      * @see Couleur
      * @see Point
      */
-    public Cercle ( Couleur couleur, Point o, int rayon ) {
+    public Cercle ( Couleur couleur, Point o, int transmission_range ) {
 
-	super ( couleur, o, rayon*2, rayon*2 );
+	super ( couleur, o, transmission_range*2, transmission_range*2 );
     array_User_Inrange = new ArrayList<>();
     }
 
     /**
-     * Construit un cercle à partir d'un Point, d'un rayon et d'une couleur.<br />
+     * Construit un cercle à partir d'un Point, d'un transmission_range et d'une couleur.<br />
      * @param couleur Couleur de l'objet.
      * @param o Point correspondant au centre du Cercle.
-     * @param rayon Rayon du Cercle.
+     * @param transmission_range transmission_range du Cercle.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
      * @see Couleur
      * @see Point
      */
-    public Cercle ( Couleur couleur, Point o, int rayon, boolean plein ) {
+    public Cercle ( Couleur couleur, Point o, int transmission_range, boolean plein ) {
 
-	super ( couleur, o, rayon*2, rayon*2, plein );
+	super ( couleur, o, transmission_range*2, transmission_range*2, plein );
     array_User_Inrange = new ArrayList<>();
     }
 
@@ -202,12 +202,12 @@ public class Cercle extends Ovale {
     // Getter //
 
     /**
-     * Retourne la valeur du rayon.
-     * @return Rayon du cercle.
+     * Retourne la valeur du transmission_range.
+     * @return transmission_range du cercle.
      */
-    public int getRayon () {
+    public int gettransmission_range () {
 
-	return getLargeur()/2;
+	return getArea_Width()/2;
     }
 
     /**
@@ -216,19 +216,19 @@ public class Cercle extends Ovale {
      */
     public int getDiametre () {
 
-	return getLargeur();
+	return getArea_Width();
     }
 
     // Setter //
 
     /**
-     * Permet d'attribuer une nouvelle valeur au rayon.<br />
+     * Permet d'attribuer une nouvelle valeur au transmission_range.<br />
      * Le centre du cercle ne bouge pas.
-     * @param rayon Nouveau rayon du cercle.
+     * @param transmission_range Nouveau transmission_range du cercle.
      */
-    public void setRayon ( int rayon ) {
+    public void settransmission_range ( int transmission_range ) {
 
-	setLargeur(rayon*2);
+	setArea_Width(transmission_range*2);
     }
 
     /**
@@ -238,27 +238,27 @@ public class Cercle extends Ovale {
      */
     public void setDiametre ( int diametre ) {
 
-	setLargeur(diametre);
+	setArea_Width(diametre);
     }
 
     /**
      * <strong>Redéfinition !</strong> Permet d'attribuer une nouvelle valeur au diamètre.
      * @param diametre Nouveau diamètre du cercle.
      */
-    public void setLargeur ( int diametre ) {
+    public void setArea_Width ( int diametre ) {
 
-	super.setLargeur(diametre);
-	super.setHauteur(diametre);
+	super.setArea_Width(diametre);
+	super.setArea_Height(diametre);
     }
 
     /**
      * <strong>Redéfinition !</strong> Permet d'attribuer une nouvelle valeur au diamètre.
      * @param diametre Nouveau diamètre du Cercle.
      */
-    public void setHauteur ( int diametre ) {
+    public void setArea_Height ( int diametre ) {
 
-	super.setLargeur(diametre);
-	super.setHauteur(diametre);
+	super.setArea_Width(diametre);
+	super.setArea_Height(diametre);
     }
 
     // Méthodes //
@@ -281,7 +281,7 @@ public class Cercle extends Ovale {
 	int dx = p.getX() - this.getO().getX();
 	int dy = p.getY() - this.getO().getY();
 
-	if ( ( dx * dx ) + ( dy * dy ) < ( getRayon() * getRayon() ) )
+	if ( ( dx * dx ) + ( dy * dy ) < ( gettransmission_range() * gettransmission_range() ) )
 	    collision = true;
 
 	return collision;
@@ -312,7 +312,7 @@ public class Cercle extends Ovale {
 	int denominateur = ( int ) ( Math.sqrt ( ux * ux + uy * uy ) );
 	int ci = numerateur / denominateur;
 
-	if ( ci < getRayon() )
+	if ( ci < gettransmission_range() )
 	    collision = true;
 
 	return collision;
@@ -336,16 +336,16 @@ public class Cercle extends Ovale {
 	if ( x < r.getA().getX() )
 	    x = r.getA().getX();
 
-	if ( x > ( r.getA().getX() + r.getLargeur() ) )
-	    x = ( r.getA().getX() + r.getLargeur() );
+	if ( x > ( r.getA().getX() + r.getArea_Width() ) )
+	    x = ( r.getA().getX() + r.getArea_Width() );
 
 	if ( y <  r.getA().getY() )
 	    y = r.getA().getY();
 
-	if ( y > ( r.getA().getY() + r.getHauteur() ) )
-	    y = ( r.getA().getY() + r.getHauteur() );
+	if ( y > ( r.getA().getY() + r.getArea_Height() ) )
+	    y = ( r.getA().getY() + r.getArea_Height() );
 
-	if ( ( this.getO().getX() - x ) * ( this.getO().getX() - x ) + ( this.getO().getY() - y ) * ( this.getO().getY() - y ) < getRayon() * getRayon() )
+	if ( ( this.getO().getX() - x ) * ( this.getO().getX() - x ) + ( this.getO().getY() - y ) * ( this.getO().getY() - y ) < gettransmission_range() * gettransmission_range() )
 	    collision = true;
 
 	return collision;
@@ -369,7 +369,7 @@ public class Cercle extends Ovale {
 
 	int dx = c.getO().getX() - this.getO().getX();
 	int dy = c.getO().getY() - this.getO().getY();
-	int ra = c.getRayon() + getRayon();
+	int ra = c.gettransmission_range() + gettransmission_range();
 
 	if ( ( dx * dx ) + ( dy * dy ) <= ( ra * ra ) )
 	    collision = true;
@@ -383,11 +383,11 @@ public class Cercle extends Ovale {
 
     /**
      * Méthode toString retournant une descirption du cercle.<br />
-     * La chaine de caractères retournée est de la forme "Cercle de centre (x1,y1) et de rayon r".
+     * La chaine de caractères retournée est de la forme "Cercle de centre (x1,y1) et de transmission_range r".
      * @return Une chaîne de caractères décrivant le cercle.
      */
     public String toString(){
-	return new String("Cercle de centre "+getO()+" et de rayon "+getRayon());
+	return new String("Cercle de centre "+getO()+" et de transmission_range "+gettransmission_range());
     }
 
     /**
@@ -403,7 +403,7 @@ public class Cercle extends Ovale {
         if (obj instanceof Cercle) {
             // Vérification des valeurs des attributs
              Cercle other = (Cercle) obj;
-	     return super.equals(other) && getRayon()==other.getRayon();
+	     return super.equals(other) && gettransmission_range()==other.gettransmission_range();
 	}
 	return false;
     }

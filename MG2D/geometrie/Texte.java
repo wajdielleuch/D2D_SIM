@@ -51,7 +51,7 @@ public class Texte extends Dessin {
 
     private Point a;	// Il s'agit du point central du texte /!\ //
 
-    private int largeur, hauteur;
+    private int Area_Width, Area_Height;
 
     private int typeAlign;
 
@@ -69,8 +69,8 @@ public class Texte extends Dessin {
 	Graphics g = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB).getGraphics();
 	FontMetrics metr = g.getFontMetrics ( police );
 
-	largeur = metr.stringWidth ( texte );
-	hauteur = police.getSize();
+	Area_Width = metr.stringWidth ( texte );
+	Area_Height = police.getSize();
 	typeAlign = CENTRE;
     }
 
@@ -86,8 +86,8 @@ public class Texte extends Dessin {
 	Graphics g = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB).getGraphics();
 	FontMetrics metr = g.getFontMetrics ( police );
 
-	largeur = metr.stringWidth ( texte );
-	hauteur = police.getSize();
+	Area_Width = metr.stringWidth ( texte );
+	Area_Height = police.getSize();
 	typeAlign=t.typeAlign;
     }
 
@@ -113,8 +113,8 @@ public class Texte extends Dessin {
 	Graphics g = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB).getGraphics();
 	FontMetrics metr = g.getFontMetrics ( police );
 
-	largeur = metr.stringWidth ( texte );
-	hauteur = police.getSize();
+	Area_Width = metr.stringWidth ( texte );
+	Area_Height = police.getSize();
 	typeAlign = CENTRE;
     }
 
@@ -139,8 +139,8 @@ public class Texte extends Dessin {
 	Graphics g = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB).getGraphics();
 	FontMetrics metr = g.getFontMetrics ( police );
 
-	largeur = metr.stringWidth ( texte );
-	hauteur = police.getSize();
+	Area_Width = metr.stringWidth ( texte );
+	Area_Height = police.getSize();
 	this.typeAlign = typeAlign;
     }
 
@@ -166,8 +166,8 @@ public class Texte extends Dessin {
 	Graphics g = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB).getGraphics();
 	FontMetrics metr = g.getFontMetrics ( police );
 
-	largeur = metr.stringWidth ( texte );
-	hauteur = police.getSize();
+	Area_Width = metr.stringWidth ( texte );
+	Area_Height = police.getSize();
 	typeAlign = CENTRE;
     }
 
@@ -193,8 +193,8 @@ public class Texte extends Dessin {
 	Graphics g = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB).getGraphics();
 	FontMetrics metr = g.getFontMetrics ( police );
 
-	largeur = metr.stringWidth ( texte );
-	hauteur = police.getSize();
+	Area_Width = metr.stringWidth ( texte );
+	Area_Height = police.getSize();
 	this.typeAlign = typeAlign;
     }
 
@@ -232,19 +232,19 @@ public class Texte extends Dessin {
     }
 
     /**
-     * Retourne la largeur du texte.
-     * @return Largeur du texte.
+     * Retourne la Area_Width du texte.
+     * @return Area_Width du texte.
      */
-    public int getLargeur () {
-	return largeur;
+    public int getArea_Width () {
+	return Area_Width;
     }
 
     /**
-     * Retourne la largeur du texte.
-     * @return Largeur du texte.
+     * Retourne la Area_Width du texte.
+     * @return Area_Width du texte.
      */
-    public int getHauteur () {
-	return hauteur;
+    public int getArea_Height () {
+	return Area_Height;
     }
 
     /**
@@ -254,14 +254,14 @@ public class Texte extends Dessin {
      */
     public BoiteEnglobante getBoiteEnglobante() {
 	if(typeAlign==CENTRE){
-	    Point bg = new Point(a.getX()-largeur/2,a.getY()-(hauteur/2));
-	    Point hd = new Point(a.getX()+largeur/2,a.getY()+(hauteur/2));
+	    Point bg = new Point(a.getX()-Area_Width/2,a.getY()-(Area_Height/2));
+	    Point hd = new Point(a.getX()+Area_Width/2,a.getY()+(Area_Height/2));
 	    
 	    return new BoiteEnglobante(bg,hd);
 	}
 	
-	Point bg = new Point(a.getX(),a.getY()-(hauteur/2));
-	Point hd = new Point(a.getX()+largeur,a.getY()+(hauteur/2));
+	Point bg = new Point(a.getX(),a.getY()-(Area_Height/2));
+	Point hd = new Point(a.getX()+Area_Width,a.getY()+(Area_Height/2));
 	return new BoiteEnglobante(bg,hd);
 	
     }
@@ -312,7 +312,7 @@ public class Texte extends Dessin {
      * Implémentation de la méthode afficher() de la classe abstraite Dessin.<br />
      * Elle permet d'afficher un Texte sur la zone d'affichage.
      * <br /><br />
-     * On récupère d'abord la couleur et la police. Une fois la police récupérée, on crée un FontMetrics afin d'avoir la dimension en largeur du texte ce qui nous permets d'afficher correctement le Texte avec le Point central donné par l'utilisateur.
+     * On récupère d'abord la couleur et la police. Une fois la police récupérée, on crée un FontMetrics afin d'avoir la dimension en Area_Width du texte ce qui nous permets d'afficher correctement le Texte avec le Point central donné par l'utilisateur.
      * @param g Graphics.
      */
     public void afficher ( Graphics g ) {

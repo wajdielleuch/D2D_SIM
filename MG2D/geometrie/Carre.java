@@ -33,7 +33,7 @@ import java.lang.RuntimeException;
 
 /**
  * Cette classe permet la création de carrés.<br />
- * Cette classe hérite de Rectangle. En effet, il s'agit d'un rectangle particulier où la hauteur et la largeur sont égales.
+ * Cette classe hérite de Rectangle. En effet, il s'agit d'un rectangle particulier où la Area_Height et la Area_Width sont égales.
  * <br /><br />
  * Elle hérite de la classe Rectangle afin que toutes les méthodes de la classe Rectangle s'applique également à celle-ci. Attention, de nombreuses méthodes (notamment les construteurs) peuvent lancer des exceptions. Pour plus d'informations, voir la classe Rectangle.
  * @author Equipe 2D, Rémi Synave
@@ -93,13 +93,13 @@ public class Carre extends Rectangle {
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.
      * @param a Coin bas gauche.
      * @param taille Dimension des côtés.
-     * @param arcLargeur Arrondis en largeur.
-     * @param arcHauteur Arrondis en hauteur.
+     * @param arcArea_Width Arrondis en Area_Width.
+     * @param arcArea_Height Arrondis en Area_Height.
      * @see Point
      */
-    public Carre ( Point a, int taille, int arcLargeur, int arcHauteur ) {
+    public Carre ( Point a, int taille, int arcArea_Width, int arcArea_Height ) {
 
-	super ( a, taille, taille, arcLargeur, arcHauteur );
+	super ( a, taille, taille, arcArea_Width, arcArea_Height );
     }
 
     /**
@@ -107,14 +107,14 @@ public class Carre extends Rectangle {
      * Il s'agit du constructeur sans couleur, ainsi l'objet sera noir.
      * @param a Coin bas gauche.
      * @param taille Dimension des côtés.
-     * @param arcLargeur Arrondis en largeur.
-     * @param arcHauteur Arrondis en hauteur.
+     * @param arcArea_Width Arrondis en Area_Width.
+     * @param arcArea_Height Arrondis en Area_Height.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
      * @see Point
      */
-    public Carre ( Point a, int taille, int arcLargeur, int arcHauteur, boolean plein ) {
+    public Carre ( Point a, int taille, int arcArea_Width, int arcArea_Height, boolean plein ) {
 
-	super ( a, taille, taille, arcLargeur, arcHauteur, plein );
+	super ( a, taille, taille, arcArea_Width, arcArea_Height, plein );
     }
 
     // Avec couleur //
@@ -151,14 +151,14 @@ public class Carre extends Rectangle {
      * @param couleur Couleur de l'objet.
      * @param a Coin bas gauche.
      * @param taille Dimension des côtés.
-     * @param arcLargeur Arrondis en largeur.
-     * @param arcHauteur Arrondis en hauteur.
+     * @param arcArea_Width Arrondis en Area_Width.
+     * @param arcArea_Height Arrondis en Area_Height.
      * @see Couleur
      * @see Point
      */
-    public Carre ( Couleur couleur, Point a, int taille, int arcLargeur, int arcHauteur ) {
+    public Carre ( Couleur couleur, Point a, int taille, int arcArea_Width, int arcArea_Height ) {
 
-	super ( couleur, a, taille, taille, arcLargeur, arcHauteur );
+	super ( couleur, a, taille, taille, arcArea_Width, arcArea_Height );
     }
 
     /**
@@ -166,15 +166,15 @@ public class Carre extends Rectangle {
      * @param couleur Couleur de l'objet.
      * @param a Coin bas gauche.
      * @param taille Taille des côtés.
-     * @param arcLargeur Arrondis en largeur.
-     * @param arcHauteur Arrondis en hauteur.
+     * @param arcArea_Width Arrondis en Area_Width.
+     * @param arcArea_Height Arrondis en Area_Height.
      * @param plein Défini si la forme doit être dessinée pleine ou non.
      * @see Couleur
      * @see Point
      */
-    public Carre ( Couleur couleur, Point a, int taille, int arcLargeur, int arcHauteur, boolean plein ) {
+    public Carre ( Couleur couleur, Point a, int taille, int arcArea_Width, int arcArea_Height, boolean plein ) {
 
-	super ( couleur, a, taille, taille, arcLargeur, arcHauteur, plein );
+	super ( couleur, a, taille, taille, arcArea_Width, arcArea_Height, plein );
     }
 
     // Accesseurs //
@@ -216,21 +216,21 @@ public class Carre extends Rectangle {
     }
 
     /**
-     * Permet la modification de la hauteur du carré.<br />
+     * Permet la modification de la Area_Height du carré.<br />
      * Le coin haut droit sera repositionné.
-     * @param hauteur Nouvelle hauteur du carré.
+     * @param Area_Height Nouvelle Area_Height du carré.
      */
-    public void setHauteur(int hauteur){
-	super.setB( new Point ( getA().getX() + hauteur, getA().getY() + hauteur ) );
+    public void setArea_Height(int Area_Height){
+	super.setB( new Point ( getA().getX() + Area_Height, getA().getY() + Area_Height ) );
     }
 
     /**
-     * Permet la modification de la largeur du carré.<br />
+     * Permet la modification de la Area_Width du carré.<br />
      * Le coin haut droit sera repositionné.
-     * @param largeur Nouvelle largeur de l'image.
+     * @param Area_Width Nouvelle Area_Width de l'image.
      */
-    public void setLargeur(int largeur){
-	super.setB ( new Point ( getA().getX() + largeur, getA().getY() + largeur) );
+    public void setArea_Width(int Area_Width){
+	super.setB ( new Point ( getA().getX() + Area_Width, getA().getY() + Area_Width) );
     }
 
     /**
@@ -244,18 +244,18 @@ public class Carre extends Rectangle {
 
     /**
      * <strong>Redéfinition : </strong> Permet la modification de la taille du carré.<br />
-     * La largeur et la hauteur d'un carré étant les mêmes, si les paramètres largeur et hauteur ne sont pas égaux, alors la méthode lance un exception RuntimeException.
-     * @param largeur nouvelle largeur de l'image
-     * @param hauteur nouvelle hauteur de l'image
+     * La Area_Width et la Area_Height d'un carré étant les mêmes, si les paramètres Area_Width et Area_Height ne sont pas égaux, alors la méthode lance un exception RuntimeException.
+     * @param Area_Width nouvelle Area_Width de l'image
+     * @param Area_Height nouvelle Area_Height de l'image
      * @exception java.lang.RuntimeException Cette exception est lancée si :<ul><li>les arrondis ont des dimensions négatives</li><li>si on tente de construire un carré avec des dimensions négatives</li><li>si le coin bas gauche et au dessus ou à droite du coin haut droit.</li></ul>.
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html" target="_blank">RuntimeException</a>
      */
-    public void setTaille(int largeur, int hauteur){
-	if(largeur!=hauteur){
-	    throw new RuntimeException("Vous essayez de créer un Carré de largeur "+largeur+" et de hauteur "+hauteur+". Un carré doit avoir la même largeur que la hauteur.");
+    public void setTaille(int Area_Width, int Area_Height){
+	if(Area_Width!=Area_Height){
+	    throw new RuntimeException("Vous essayez de créer un Carré de Area_Width "+Area_Width+" et de Area_Height "+Area_Height+". Un carré doit avoir la même Area_Width que la Area_Height.");
 	}
 	else
-	    super.setB ( new Point ( getA().getX() + largeur, getA().getY() + hauteur ) );
+	    super.setB ( new Point ( getA().getX() + Area_Width, getA().getY() + Area_Height ) );
     }
 
     // Méthodes //
@@ -272,10 +272,10 @@ public class Carre extends Rectangle {
 	g.setColor ( getCouleur() );
 
 	if ( getArrondi() && getPlein() )
-	    g.fillRoundRect ( this.getA().getX(), (int)g.getClipBounds().getHeight()-this.getA().getY()-getTaille(), getTaille(), getTaille(), getArcLargeur(), getArcHauteur() );
+	    g.fillRoundRect ( this.getA().getX(), (int)g.getClipBounds().getHeight()-this.getA().getY()-getTaille(), getTaille(), getTaille(), getArcArea_Width(), getArcArea_Height() );
 
 	else if ( getArrondi() )
-	    g.drawRoundRect ( this.getA().getX(), (int)g.getClipBounds().getHeight()-this.getA().getY()-getTaille(), getTaille(), getTaille(), getArcLargeur(), getArcHauteur() );
+	    g.drawRoundRect ( this.getA().getX(), (int)g.getClipBounds().getHeight()-this.getA().getY()-getTaille(), getTaille(), getTaille(), getArcArea_Width(), getArcArea_Height() );
 
 	else if ( getPlein() )
 	    g.fillRect ( this.getA().getX(), (int)g.getClipBounds().getHeight()-this.getA().getY()-getTaille(), getTaille(), getTaille() );

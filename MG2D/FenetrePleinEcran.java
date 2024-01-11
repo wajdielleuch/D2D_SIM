@@ -34,7 +34,7 @@ import java.awt.GraphicsEnvironment;
  * Cette classe crée une fenêtre comportant une zone d'affichage aux dimensions précisées.
  * <br /><br />
  * L'origine, le point (0,0) se trouve en bas à gauche de la zone d'affichage.<br />
- * L'utilisateur peut définir un titre, une largeur et une hauteur à cette fenêtre.<br />
+ * L'utilisateur peut définir un titre, une Area_Width et une Area_Height à cette fenêtre.<br />
  * Par la suite, il pourra, au travers de cette classe, gérer un ensemble de formes affichés.
  * @author Equipe 2D, Rémi Synave
  * @version 2.9

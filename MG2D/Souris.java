@@ -70,8 +70,8 @@ public class Souris implements MouseListener, MouseMotionListener {
 
     /**
      * Crée une souris et initialise tous les attributs à faux pour clics relachés.<br />
-     * Ce constructeur utilise la hauteur (passé en paramètre) de la fenêtre afin de calculer la position exacte de la souris. L'origine de la zone d'affichage se trouve en bas à gauche de la fenêtre.
-     * @param taille Taille en hauteur de la fenêtre.
+     * Ce constructeur utilise la Area_Height (passé en paramètre) de la fenêtre afin de calculer la position exacte de la souris. L'origine de la zone d'affichage se trouve en bas à gauche de la fenêtre.
+     * @param taille Taille en Area_Height de la fenêtre.
      */
     public Souris (int taille) {
 	clicGauche=false;

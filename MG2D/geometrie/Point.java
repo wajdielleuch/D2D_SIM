@@ -227,7 +227,7 @@ public class Point extends Dessin {
 	int dx = x - c.getO().getX();
 	int dy = y - c.getO().getY();
 
-	if ( ( dx * dx ) + ( dy * dy ) < ( c.getRayon() * c.getRayon() ) )
+	if ( ( dx * dx ) + ( dy * dy ) < ( c.gettransmission_range() * c.gettransmission_range() ) )
 	    collision = true;
 
 	return collision;
